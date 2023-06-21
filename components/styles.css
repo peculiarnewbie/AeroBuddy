@@ -1,0 +1,113 @@
+
+.show{
+    display: block;
+}
+
+.Header{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 120px;
+    background-color: white;
+}
+
+.Container{
+    height: 100%;
+    background-color: aqua;
+    padding: 0 15px;
+}
+
+.Navbar-logo{
+    background-color: beige;
+    width: 250px;
+    min-width: 250px;
+    height: 35px;
+    position: relative;
+}
+
+.Navbar-main{
+    display: flex;
+    background-color: coral;
+    height: 100%;
+    width: 100%;
+}
+
+.Navbar-buttons{
+    background-color: cornflowerblue;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    margin-left: 58px;
+}
+
+.Navbar-item{
+
+}
+
+.Navbar-burger{
+    background-color: darkcyan;
+    height: 100%;
+    width: 100%;
+}
+
+.Navbar-login{
+    margin-left: 40px;
+    min-width: 120px;
+    height: 51px;
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    border: 2px solid;
+    box-shadow: 0 20px 24px 0 rgba(0,11,40,.1); 
+}
+
+.Navbar-login:hover{
+    box-shadow: none;
+    background-color: black;
+    border-color: black;
+    color: white;
+}
+
+.Collapse:not(.show){
+    display: none;
+}
+
+.Collapsed{
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .Container {
+        width: 100%;
+        max-width: 720px;
+    }
+
+    .Collapsed{
+        display: block;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .Container {
+        width: 720px;
+    }
+
+    .Collapsed{
+        display: block;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .Container {
+        width: 960px;
+    }
+}
+
+@media screen and (min-width: 1200px)  {
+    .Container {
+        width: 1200px;
+    }
+    .Navbar-buttons{
+        margin-left: 172px;
+    }
+}
