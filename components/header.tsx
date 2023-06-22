@@ -7,12 +7,14 @@ import Navbar from './Navbar'
 export default function Header(){
     return (
         <div className="Header">
-            <div className='Container' style={{display:'flex', alignItems: 'center'}}>
+            <div className='Container' style={{display:'flex', flexWrap:'wrap', alignItems: 'center'}}>
                 <div className="Navbar-logo">
                     <Image
                         src={logo}
                         alt="Picture of the author"
                         fill
+                        priority = {true}
+                        placeholder="blur"
                     />
 
                 </div>

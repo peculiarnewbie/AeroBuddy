@@ -1,6 +1,6 @@
 
 .show{
-    display: block;
+    display: block ;
 }
 
 .Header{
@@ -19,9 +19,9 @@
 
 .Navbar-logo{
     background-color: beige;
-    width: 250px;
-    min-width: 250px;
-    height: 35px;
+    width: 200px;
+    min-width: 200px;
+    height: 28px;
     position: relative;
 }
 
@@ -29,33 +29,75 @@
     display: flex;
     background-color: coral;
     height: 100%;
-    width: 100%;
+    flex-grow: 10;
 }
 
 .Navbar-buttons{
-    background-color: cornflowerblue;
+    display: flex;
+    background-color: white;
     height: 100%;
     width: 100%;
     position: relative;
-    margin-left: 58px;
+    margin-left: 30px;
+    justify-content: space-between;
+    gap: 10px;
 }
 
-.Navbar-item{
 
+.Navbar-item{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.Navbar-button{
+    background-color: transparent;
+    border: none;
+    font-size: 15px;
+    font-family: inherit;
+    position: relative;
+    text-decoration: none;
+    color: black;
+}
+
+.Navbar-button::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    border-radius: 4px;
+    background-color: cornflowerblue;
+    bottom: 0;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .2s ease-in-out;
+}
+
+.Navbar-button:hover::before{
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.Navbar-button:hover{
+    color:cornflowerblue;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
 }
 
 .Navbar-burger{
     background-color: darkcyan;
     height: 100%;
-    width: 100%;
+    flex-grow: 10;
 }
 
 .Navbar-login{
+    align-self: center;
     margin-left: 40px;
     min-width: 120px;
     height: 51px;
     background-color: white;
-    color: black;
+    color: cornflowerblue;
     border-radius: 4px;
     border: 2px solid;
     box-shadow: 0 20px 24px 0 rgba(0,11,40,.1); 
@@ -63,9 +105,11 @@
 
 .Navbar-login:hover{
     box-shadow: none;
-    background-color: black;
-    border-color: black;
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
     color: white;
+    transition: .3s ease-in-out;
+    cursor: pointer;
 }
 
 .Collapse:not(.show){
@@ -95,6 +139,29 @@
     .Collapsed{
         display: block;
     }
+
+}
+
+@media screen and (max-width:991px){
+    .Navbar-main{
+        height: fit-content;
+        width: 100%;
+        display: block;
+        margin-left: -15px;
+        background-color: white;
+        padding: 0 15px;
+    }
+
+    .Navbar-buttons{
+        margin-left: 0px;
+        flex-direction: column;
+        font-family: var(--font-poppins-semi-bold);
+    }
+
+    .Navbar-login{
+        margin-left: 0px;
+    }
+    
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
@@ -108,6 +175,6 @@
         width: 1200px;
     }
     .Navbar-buttons{
-        margin-left: 172px;
+        margin-left: 112px;
     }
 }

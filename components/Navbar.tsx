@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { poppinsSemiBold } from '@/app/fonts'
 import './styles.css'
 
 export default function Navbar(){
@@ -18,7 +19,7 @@ export default function Navbar(){
         return () => {
           window.removeEventListener("resize", handleResize);
         };
-      }, []);
+      }, [burgerOpened]);
 
     const OnBurgerClick = () => {
         setburgerOpened(!burgerOpened)
@@ -36,12 +37,27 @@ export default function Navbar(){
 
             <div className={`Collapse ${show ? 'show' : ''} Navbar-main`}>
 
-                <div className='Navbar-buttons'>
-
+                <div className={`${poppinsSemiBold.className} Navbar-buttons`}>
+                    <div className='Navbar-item'>
+                        <button className='Navbar-button'>Use-cases</button>
+                    </div>
+                    <div className='Navbar-item'>
+                        <button className='Navbar-button'>Technology</button>
+                    </div>
+                    <div className='Navbar-item'>
+                        <button className='Navbar-button'>Integration</button>
+                    </div>
+                    <div className='Navbar-item'>
+                        <button className='Navbar-button'>Support</button>
+                    </div>
+                    <div className='Navbar-item'>
+                        <button className='Navbar-button'>Channels</button>
+                    </div>
+                    <div className='Navbar-item'>
+                        <button className='Navbar-button'>Clients</button>
+                    </div>
                 </div>
-                <div style={{display: 'flex', justifyContent: 'right', alignItems: 'center', height: '100%'}}>
-                    <button className='Navbar-login'>Log in</button>
-                </div>
+                <button className='Navbar-login'>Log in</button>
             </div>
         </>
     )
