@@ -7,18 +7,17 @@
     display: flex;
     justify-content: center;
     width: 100vw;
-    height: 120px;
-    background-color: white;
+    height: 93px;
+    background-color: rgba(var(--our-white));
 }
 
 .Container{
     height: 100%;
-    background-color: aqua;
     padding: 0 15px;
 }
 
 .Navbar-logo{
-    background-color: beige;
+    cursor: pointer;
     width: 200px;
     min-width: 200px;
     height: 28px;
@@ -27,14 +26,13 @@
 
 .Navbar-main{
     display: flex;
-    background-color: coral;
     height: 100%;
     flex-grow: 10;
 }
 
 .Navbar-buttons{
     display: flex;
-    background-color: white;
+    background-color: rgba(var(--our-white));;
     height: 100%;
     width: 100%;
     position: relative;
@@ -66,7 +64,7 @@
     width: 100%;
     height: 2px;
     border-radius: 4px;
-    background-color: cornflowerblue;
+    background-color: grey;
     bottom: 0;
     left: 0;
     transform-origin: right;
@@ -80,7 +78,7 @@
 }
 
 .Navbar-button:hover{
-    color:cornflowerblue;
+    color:grey;
     transition: all .2s ease-in-out;
     cursor: pointer;
 }
@@ -96,19 +94,20 @@
     margin-left: 40px;
     min-width: 120px;
     height: 51px;
-    background-color: white;
-    color: cornflowerblue;
+    background-color: rgba(var(--our-white));;
+    color: black;
     border-radius: 4px;
     border: 2px solid;
     box-shadow: 0 20px 24px 0 rgba(0,11,40,.1); 
+    transition: .2s ease-in-out;
 }
 
 .Navbar-login:hover{
     box-shadow: none;
-    background-color: cornflowerblue;
-    border-color: cornflowerblue;
+    background-color: grey;
+    border-color: grey;
     color: white;
-    transition: .3s ease-in-out;
+    transition: .2s ease-in-out;
     cursor: pointer;
 }
 
@@ -148,7 +147,7 @@
         width: 100%;
         display: block;
         margin-left: -15px;
-        background-color: white;
+        background-color: rgba(var(--our-white));;
         padding: 0 15px;
     }
 
