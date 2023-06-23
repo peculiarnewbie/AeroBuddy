@@ -10,7 +10,6 @@
     justify-content: center;
     width: 100vw;
     height: 93px;
-    background-color: rgba(var(--our-white));
     z-index: 1;
 }
 
@@ -19,11 +18,13 @@
     margin-top: -100px;
     height: 100px;
     transition: box-shadow .2s ease-in-out;
+    background-color: rgba(var(--our-white));
     z-index: -1;
 }
 
 .HeaderShadow.scrolled{
     box-shadow: 0 5px 10px 0 rgba(0,11,30,.06);
+    background-color: white;
 }
 
 .Container{
@@ -46,7 +47,6 @@
 
 .Navbar-buttons{
     display: flex;
-    background-color: rgba(var(--our-white));;
     height: 100%;
     width: 100%;
     position: relative;
@@ -316,6 +316,8 @@
 }
 
 .Content1Button{
+    display: flex;
+    align-items: center;
     padding: 15px;
     max-width: 250px;
     height: 53px;
@@ -375,6 +377,7 @@
         align-items: center;
         text-align: center;
         width: 100%;
+        height: fit-content;
     }
 
     .Content1H2{
@@ -384,6 +387,7 @@
     .Content1ImageContainer{
         width: 100%;
         max-width: 750px;
+        margin-top: 30px;
     }
 
     .COntent1EmailContainer{
