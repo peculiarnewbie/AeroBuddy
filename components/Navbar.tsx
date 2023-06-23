@@ -30,7 +30,12 @@ export default function Navbar(){
         <>
             <div className='Collapsed Navbar-burger'>
                 <div style={{display: 'flex', justifyContent: 'right', alignItems: 'center', height: '100%'}}>
-                    <button onClick={OnBurgerClick}>burger</button>
+                    <div className={burgerOpened ? 'open' : ''} id="nav-icon3" onClick={OnBurgerClick}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
             </div>
             
@@ -57,7 +62,7 @@ export default function Navbar(){
                         <button className='Navbar-button'>Clients</button>
                     </div>
                 </div>
-                <button className='Navbar-login'>Log in</button>
+                <button className={`${poppinsSemiBold.className} Navbar-login`}>Log in</button>
             </div>
         </>
     )
