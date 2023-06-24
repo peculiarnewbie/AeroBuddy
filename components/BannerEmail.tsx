@@ -2,12 +2,12 @@
 
 import './styles.css'
 import './radixstyles.css'
-import { poppinsSemiBold } from '@/app/fonts'
+import { poppins } from '@/app/fonts'
 import * as Form from '@radix-ui/react-form';
 
 export default function BannerEmail(){
     return(
-        <Form.Root className="FormRoot">
+        <Form.Root className="FormRoot" style={{display:'flex', flexDirection: 'column'}}>
             <Form.Field className="Content1EmailContainer" name="email">
                 {/* <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', color: 'black' }}>
                     <Form.Label className="FormLabel">Email</Form.Label>
@@ -23,7 +23,7 @@ export default function BannerEmail(){
                 </Form.Control>
             </Form.Field>
             <Form.Submit asChild>
-                <button className={`${poppinsSemiBold.className} Content1Button slide-in-left animation-delay-4`}>
+                <button className={`${poppins.className} Content1Button slide-in-left animation-delay-4`}>
                     Schedule a demonstration
                 </button>
             </Form.Submit>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { poppinsSemiBold } from '@/app/fonts'
+import { poppins } from '@/app/fonts'
 import './styles.css'
 
 export default function Navbar(){
@@ -42,7 +42,7 @@ export default function Navbar(){
 
             <div className={`Collapse ${show ? 'show' : ''} Navbar-main`}>
 
-                <div className={`${poppinsSemiBold.className} Navbar-buttons`}>
+                <div className={`${poppins.className} Navbar-buttons`}>
                     <div className='Navbar-item'>
                         <button className='Navbar-button'>Use-cases</button>
                     </div>
@@ -62,7 +62,7 @@ export default function Navbar(){
                         <button className='Navbar-button'>Clients</button>
                     </div>
                 </div>
-                <button className={`${poppinsSemiBold.className} Navbar-login`}>Log in</button>
+                <button className={`${poppins.className} Navbar-login`}>Log in</button>
             </div>
         </>
     )

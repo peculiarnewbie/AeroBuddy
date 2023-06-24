@@ -1,0 +1,238 @@
+
+.ClientsArea{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 100px 0 35px
+}
+
+.ClientsItem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 151px;
+    height: 47px;
+}
+
+.ClientsItemsimg{
+    flex-shrink: 0;
+    max-width: 100%;
+    max-height: 100%;
+    filter: saturate(0%) contrast(30%);
+    animation: grayscale-animation-reverse 0.25s ease-in-out forwards;
+}
+
+.ClientsItemsimg:hover{
+    animation: grayscale-animation 0.25s ease-in-out forwards;
+}
+
+@media screen and (max-width:600px) {
+    .ClientsArea{
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+}
+
+@keyframes grayscale-animation {
+    0% {
+        filter: saturate(0%) contrast(30%);
+    }
+    100% {
+        filter: saturate(100%) contrast(100%);
+    }
+  }
+
+  @keyframes grayscale-animation-reverse {
+    0% {
+        filter: saturate(100%) contrast(100%);
+    }
+    100% {
+        filter: saturate(0%) contrast(30%);
+    }
+  }
+
+.UseCases{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0 0 5px 0 rgba(0,11,40,.1);
+    width: 200vw;
+    padding: 100px 0 80px;
+    z-index: 1;
+}
+
+.UseCasesItemsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.UseCasesItem{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 370px;
+    height: 252px;
+    padding: 0 40px;
+}
+
+.UseCasesImgContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 84px;
+    height: 99px;
+}
+
+.UseCasesImg{
+    flex-shrink: 0;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@media screen and (max-width: 599px) {
+    .UseCasesItem{
+        width: 100%;
+        margin: 0 0 30px;
+        padding: 0;
+    }
+
+    .UseCasesItemsContainer{
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width:600px) and (max-width: 991px) {
+    .UseCasesItem{
+        width: 45%;
+        min-width: 200px;
+        max-width: 330px;
+        padding: 0;
+    }
+}
+
+@media screen and (min-width:992px) and (max-width: 1199px) {
+    .UseCasesItem{
+        width: 290px;
+        padding: 0;
+    }
+}
+
+@media screen and (min-width:1200px) and (max-width: 1550px) {
+    .UseCasesItem{
+        height: 224px;
+        margin: 0 0 30px;
+        padding: 0;
+    }
+}
+
+.Technology{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: white;
+    width: 200vw;
+    padding: 100px 0 80px;
+}
+
+.TechnologyItemsContainer{
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 90px 170px;
+}
+
+.TechnologyItem{
+    display: flex;
+    align-items: center;
+    width: 500px;
+    height: 196px;
+}
+
+.TechnologyText{
+    width: 50%;
+    flex-grow: 3;
+}
+
+.TechnologyImgContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 190px;
+    height: 196px;
+    margin: 0 40px 0 0;
+}
+
+.TechnologyImg{
+    flex-shrink: 0;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@media screen and (max-width: 599px) {
+    .TechnologyItem{
+        flex-direction: column;
+        width: 100%;
+        height: fit-content;
+        padding: 0;
+    }
+
+    .TechnologyItemsContainer{
+        width: 100%;
+        height: fit-content;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px 0px;
+    }
+
+    .TechnologyText{
+        text-align: center;
+        width: 100%;
+    }
+
+    .TechnologyImg{
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (min-width:600px) and (max-width: 768px) {
+    .TechnologyItem{
+        padding: 0 15px;
+    }
+}
+
+@media screen and (min-width:599px) and (max-width: 991px) {
+    .TechnologyItem{
+        width: 100%;
+        min-width: 200px;
+    }
+
+    .TechnologyItemsContainer{
+        gap: 50px 0px;
+    }
+
+    .TechnologyText{
+        width: 70%;
+    }
+}
+
+@media screen and (min-width:992px) and (max-width: 1199px) {
+    .TechnologyItem{
+        width: 450px;
+        height: 190px;
+    }
+
+    .TechnologyItemsContainer{
+        gap: 50px 30px;
+    }
+}
+
