@@ -16,21 +16,53 @@ export default async function Home() {
   const notion = new Client({
     auth: process.env.NOTION_KEY,
   })
+
+  
   
   async function getSectionData(section:string){
-    const response = await notion.databases.query({
-      database_id: process.env.NOTION_DATABASE_ID ? process.env.NOTION_DATABASE_ID : "",
-      filter:{
-        select: {equals: section},
-        property: 'Section',
+
+    const options = {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'Notion-Version': '2022-06-28',
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${process.env.NOTION_KEY}`
       },
-      sorts:[
+      cache: 'no-store',
+      body: JSON.stringify(
         {
-          property: 'index',
-          direction: 'ascending',
-        }
-      ],
-    })
+          "filter" : {
+            "property": "Section",
+            "select": {
+                "equals": section
+            },
+          },
+          "sorts": [{
+            "property": "index",
+            "direction": "ascending"
+          }]
+       })
+    };
+
+    //@ts-ignore
+    const raw = await fetch(`https://api.notion.com/v1/databases/${process.env.NOTION_DATABASE_ID}/query`, options)
+
+    const response = await raw.json()
+
+    // const response = await notion.databases.query({
+    //   database_id: process.env.NOTION_DATABASE_ID ? process.env.NOTION_DATABASE_ID : "",
+    //   filter:{
+    //     select: {equals: section},
+    //     property: 'Section',
+    //   },
+    //   sorts:[
+    //     {
+    //       property: 'index',
+    //       direction: 'ascending',
+    //     }
+    //   ],
+    // })
     return response;
   }
 
