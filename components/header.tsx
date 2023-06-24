@@ -8,7 +8,7 @@ import HeaderShadow from './HeaderShadow'
 export default function Header(){
     return (
         <header className="Header">
-            <div className='Container' style={{display:'flex', flexWrap:'wrap', alignItems: 'center', height:'93px'}}>
+            <div className='Container HeaderContainer' style={{display:'flex', flexWrap:'wrap', alignItems: 'center'}}>
                 <div className="Navbar-logo">
                     <Image
                         src={logo}
