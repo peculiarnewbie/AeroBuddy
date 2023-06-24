@@ -236,3 +236,109 @@
     }
 }
 
+.Integration{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: white;
+    width: 200vw;
+    padding: 100px 0 80px;
+}
+
+.IntegrationItemsContainer{
+    display: flex;
+    justify-content: space-between;
+    gap: 70px;
+}
+
+.IntegrationItem{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    box-shadow: 0 50px 100px 0 rgba(1,1,64,.06);
+    border-radius: 30px;
+    background-color: white;
+}
+
+.p0{
+    margin-top: 150px;
+}
+
+.p1{
+    margin-top: 75px;
+}
+
+.IntegrationText{
+    padding: 26px 0 0;
+    width: 50%;
+}
+
+.IntegrationImgContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
+}
+
+.IntegrationImg{
+    flex-shrink: 0;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@media screen and (max-width: 599px) {
+    .IntegrationItem{
+        flex-direction: column;
+        width: 100%;
+        height: 220px;
+        padding: 0;
+    }
+
+    .IntegrationItemsContainer{
+        width: 100%;
+        height: fit-content;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px 0px;
+    }
+
+    .IntegrationText{
+        text-align: center;
+        width: 100%;
+    }
+
+    .p0{
+        margin-top: 0;
+    }
+    
+    .p1{
+        margin-top: 0;
+    }
+
+}
+
+@media screen and (min-width:599px) and (max-width: 991px) {
+    .IntegrationItem{
+        height: 215px;
+    }
+
+    .IntegrationItemsContainer{
+        gap: 15px;
+    }
+
+    .IntegrationText{
+        width: 70%;
+    }
+}
+
+@media screen and (min-width:992px) and (max-width: 1199px) {
+    .IntegrationItemsContainer{
+        gap: 40px
+    }
+}
+
