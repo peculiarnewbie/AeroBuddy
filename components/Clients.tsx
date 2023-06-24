@@ -1,17 +1,17 @@
 import './styles.css'
-import './clientsstyles.css'
+import './additionalstyles.css'
 
 export default function Clients({notion} : {notion:any}){
 
     console.log(notion)
 
     return(
-        <section className="Container" style={{marginTop: '50px'}}>
+        <section className="Container">
 
             <div className='ClientsArea'>
                 {notion.map((item:any, index:number) => (
                     <div className='ClientsItem'>
-                        <img key={index} src={item}></img>
+                        <img className='ClientsItemsimg' key={index} src={item} />
                     </div>
                     ))}
             </div>
