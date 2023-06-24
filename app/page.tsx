@@ -8,6 +8,7 @@ import { equal } from 'assert'
 import Clients from '@/components/Clients'
 import UseCases from '@/components/UseCases'
 import Technology from '@/components/Technology'
+import Integration from '@/components/Integration'
 
 
 
@@ -70,28 +71,29 @@ export default async function Home() {
   const clientsData = getSectionData('Clients')
   const usecasesData = getSectionData('UseCases')
   const technologyData = getSectionData('Technology')
+  const integrationData = getSectionData('Integration')
 
-  const [banner, client, usecases, technology] = await Promise.all([bannerData, clientsData, usecasesData, technologyData])
+  const [banner, client, usecases, technology, integration] = await Promise.all([bannerData, clientsData, usecasesData, technologyData, integrationData])
 
-  let allData = [banner, client, usecases, technology]
+  let allData = [banner, client, usecases, technology, integration]
 
-  const sIndex = {banner: 0, clients: 1, usecases: 2, technology: 3}
+  const sIndex = {banner: 0, clients: 1, usecases: 2, technology: 3, integration: 4}
 
   function getText(groupIndex:number, index:number){
     //@ts-ignore
-    const text = allData[groupIndex].results[index]?.properties.Text.rich_text[0].plain_text
+    const text = allData[groupIndex].results[index]?.properties.Text.rich_text[0]?.plain_text
     return text ? text : 'missing notion block'
   }
 
   function getAltText(groupIndex:number, index:number){
     //@ts-ignore
-    const text = allData[groupIndex].results[index]?.properties.altText.rich_text[0].plain_text
+    const text = allData[groupIndex].results[index]?.properties.altText.rich_text[0]?.plain_text
     return text ? text : 'missing notion block'
   }
 
   function getImage(groupIndex:number, index:number){
     //@ts-ignore
-    const url = allData[groupIndex].results[index]?.properties.URL.url
+    const url = allData[groupIndex].results[index]?.properties.URL?.url
     return url ? url : 'missing url'
   }
 
@@ -124,6 +126,12 @@ export default async function Home() {
       getObject(sIndex.technology, 2),
       getObject(sIndex.technology, 3),
       getObject(sIndex.technology, 4),
+    ],
+    integration:[
+      getObject(sIndex.integration, 0),
+      getObject(sIndex.integration, 1),
+      getObject(sIndex.integration, 2),
+      getObject(sIndex.integration, 3),
     ]
   }
 
@@ -135,6 +143,7 @@ export default async function Home() {
       <Clients notion={content.clients}></Clients>
       <UseCases notion={content.usecases}></UseCases>
       <Technology notion={content.technology}></Technology>
+      <Integration notion={content.integration}></Integration>
       
       <div style={{height: '1000px'}}>
       </div>
