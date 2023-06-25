@@ -23,7 +23,7 @@ export default function Technology({notion} : {notion:any}){
                     {ucItems.map((item:any, index:number) => (
                         <div className='TechnologyItem' key={index}>
                             <div className='TechnologyImgContainer'>
-                                <img className='TechnologyImg' src={item.img} alt="usecases"></img>
+                                <img loading="lazy" className='TechnologyImg' src={item.img} alt="usecases" ></img>
                             </div>
                             <div className='TechnologyText'>
                                 <h4 className={`${poppins.className}`} style={{margin:'0 0 18px', fontWeight:'500'}}>{item.h}</h4>

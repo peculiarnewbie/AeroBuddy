@@ -5,7 +5,7 @@ import './radixstyles.css'
 import { poppins } from '@/app/fonts'
 import * as Form from '@radix-ui/react-form';
 
-export default function BannerEmail(){
+export default function BannerEmail({loading}:{loading:boolean}){
     return(
         <Form.Root className="FormRoot" style={{display:'flex', flexDirection: 'column'}}>
             <Form.Field className="Content1EmailContainer" name="email">
@@ -19,11 +19,11 @@ export default function BannerEmail(){
                     </Form.Message>
                 </div> */}
                 <Form.Control asChild>
-                    <input className='Content1Email slide-in-left animation-delay-3' type="email" placeholder='E-mail' required />
+                    <input className={`Content1Email ${loading ? '' : 'slide-in-left animation-delay-3'}`} type="email" placeholder='E-mail' required />
                 </Form.Control>
             </Form.Field>
             <Form.Submit asChild>
-                <button className={`${poppins.className} Content1Button slide-in-left animation-delay-4`}>
+                <button className={`${poppins.className} Content1Button ${loading ? '' : 'slide-in-left animation-delay-4'}`}>
                     Schedule a demonstration
                 </button>
             </Form.Submit>

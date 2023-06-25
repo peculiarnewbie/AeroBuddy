@@ -48,8 +48,6 @@ export default function Channels({notion} : {notion:any}){
 
     useEffect(() => {
         if(loaded){
-            console.log('clearing')
-            console.log(loaded)
             clearInterval(intervalId)
         }
         else{
@@ -86,7 +84,7 @@ export default function Channels({notion} : {notion:any}){
                     </Tabs.List>
                     {ucItems.map((item:any, index:number) => (
                         <div key={index} className={`ChannelsImgContainer ${selected == index ? 'active' : ''}`}>
-                            <img className={`ChannelsImg ${imgLoaded[index] ? 'loaded' : ''}`} src={item.img} alt="Channels"></img>
+                            <img loading="lazy" className={`ChannelsImg ${imgLoaded[index] ? 'loaded' : ''}`} src={item.img} alt="Channels" ></img>
                         </div>
                     ))}
                     {/* <Tabs.Content value="tab1">Tab one content</Tabs.Content>
