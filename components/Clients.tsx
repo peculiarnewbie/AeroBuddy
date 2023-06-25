@@ -11,7 +11,7 @@ export default function Clients({notion} : {notion:any}){
             <div className='ClientsArea'>
                 {notion.map((item:any, index:number) => (
                     <div key={index} className='ClientsItem'>
-                        <img className='ClientsItemsimg' src={item} />
+                        <img className='ClientsItemsimg' src={item} alt='airport' />
                     </div>
                     ))}
             </div>

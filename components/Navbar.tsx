@@ -5,7 +5,7 @@ import { poppins } from '@/app/fonts'
 import './styles.css'
 
 export default function Navbar(){
-    const [show, setShow] = useState(true)
+    const [show, setShow] = useState(false)
     const [burgerOpened, setburgerOpened] = useState(false)
 
     useEffect(() => {
@@ -15,7 +15,8 @@ export default function Navbar(){
     
         window.addEventListener("resize", handleResize);
         handleResize();
-    
+        
+
         return () => {
           window.removeEventListener("resize", handleResize);
         };

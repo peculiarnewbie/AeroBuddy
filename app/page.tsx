@@ -9,6 +9,7 @@ import Clients from '@/components/Clients'
 import UseCases from '@/components/UseCases'
 import Technology from '@/components/Technology'
 import Integration from '@/components/Integration'
+import Splash from '@/components/LoadingSplash'
 
 
 
@@ -139,6 +140,7 @@ export default async function Home() {
 
   return (
     <main className={styles.main} style={{justifyContent: 'start'}}>
+      <Splash></Splash>
       <Header></Header>
       <Banner notion={content.banner}></Banner>
       <Clients notion={content.clients}></Clients>
