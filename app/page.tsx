@@ -30,7 +30,7 @@ export default async function Home() {
         'content-type': 'application/json',
         'Authorization': `Bearer ${process.env.NOTION_KEY}`
       },
-      cache: 'no-store',
+      next: { tags: ['content'] },
       body: JSON.stringify(
         {
           "filter" : {
@@ -50,6 +50,8 @@ export default async function Home() {
     const raw = await fetch(`https://api.notion.com/v1/databases/${process.env.NOTION_DATABASE_ID}/query`, options)
 
     const response = await raw.json()
+
+    console.log('fetched', section);
 
     // const response = await notion.databases.query({
     //   database_id: process.env.NOTION_DATABASE_ID ? process.env.NOTION_DATABASE_ID : "",
@@ -134,7 +136,6 @@ export default async function Home() {
       getObject(sIndex.integration, 3),
     ]
   }
-
 
   return (
     <main className={styles.main} style={{justifyContent: 'start'}}>

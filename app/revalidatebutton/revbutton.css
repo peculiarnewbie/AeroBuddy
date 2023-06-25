@@ -1,0 +1,30 @@
+
+
+.RevButton{
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    max-width: 250px;
+    height: 45px;
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    border: 2px solid black;
+    transition: .2s ease-in-out;
+    margin: 4px;
+}
+
+.RevButton:hover{
+    cursor: pointer;
+    background-color: rgba(var(--our-white));;
+    color: black;
+    border: 2px solid black;
+}
+
+.Container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
