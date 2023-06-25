@@ -2,21 +2,67 @@
 
 import './styles.css'
 import './additionalstyles.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as Tabs  from '@radix-ui/react-tabs';
 
 import { poppins } from '@/app/fonts';
 
 export default function Channels({notion} : {notion:any}){
 
+    const ucItems = notion.slice(1);
+
     const [inView, setInView] = useState(false);
     const [selected, setSelected] = useState(0)
+
+    const [imgLoaded, setimgLoaded] = useState(Array.from({ length: ucItems.length }, () => false))
+
+    const[loaded, setLoaded] = useState(false);
+    const[update, setUpdated] = useState(false)
+
+    let intervalId:any
+
+    function CheckLoaded(){
+        if(!loaded){
+            let i=0
+            let allLoaded = true;
+            let newLoaded = imgLoaded
+            //@ts-ignore
+            ucItems.forEach(item => {
+                var image = new Image();
+                image.src = item.img;
+                if(image.complete) newLoaded[i] = true
+                else{
+                    allLoaded = false;
+                }
+                i = i+1
+            });
+            setimgLoaded(newLoaded);
+            setUpdated(!update)
+            setLoaded(allLoaded)
+        }
+    }
+
+    useEffect(() => {
+        
+    }, [])
+
+    useEffect(() => {
+        if(loaded){
+            console.log('clearing')
+            console.log(loaded)
+            clearInterval(intervalId)
+        }
+        else{
+            intervalId = setInterval(() => CheckLoaded(), 10)
+        }
+        return () => {
+            clearInterval(intervalId);
+          };
+    }, [loaded])
 
     function handleClick(index:number){
         setSelected(index);
     }
-
-    const ucItems = notion.slice(1);
 
     return(
         <section className='Channels'>
@@ -29,8 +75,8 @@ export default function Channels({notion} : {notion:any}){
                     <Tabs.List className='ChannelsItemsSelection' aria-label="tabs example">
                         {ucItems.map((item:any, index:number) => (
                             <Tabs.Trigger className={`ChannelsItem${selected == index ? ' active' : ''}`} value={`tab${index}`} onClick={() => handleClick(index)} key={index}>
-                                <h4 className={`${poppins.className}`} style={{margin:'0 0 18px', fontWeight:'600'}}>{item.h}</h4>
-                                <p className={`${poppins.className}`} style={{color: 'inherit'}} >{item.p}</p>
+                                <h4 className={`${poppins.className}`} style={{margin:'0 0 18px', fontWeight:'500', fontSize: '17px'}}>{item.h}</h4>
+                                <p className={`${poppins.className}`} style={{color: 'inherit', fontWeight:'300', fontSize: '15px'}} >{item.p}</p>
                             </Tabs.Trigger>
                         ))}
 
@@ -39,11 +85,9 @@ export default function Channels({notion} : {notion:any}){
                         <Tabs.Trigger value="tab3">Three</Tabs.Trigger> */}
                     </Tabs.List>
                     {ucItems.map((item:any, index:number) => (
-                        <Tabs.Content value={`tab${index}`} key={index}>
-                            <div className='ChannelsImgContainer'>
-                                <img className='ChannelsImg' src={item.img} alt="Channels"></img>
-                            </div>
-                        </Tabs.Content>
+                        <div key={index} className={`ChannelsImgContainer ${selected == index ? 'active' : ''}`}>
+                            <img className={`ChannelsImg ${imgLoaded[index] ? 'loaded' : ''}`} src={item.img} alt="Channels"></img>
+                        </div>
                     ))}
                     {/* <Tabs.Content value="tab1">Tab one content</Tabs.Content>
                     <Tabs.Content value="tab2">Tab two content</Tabs.Content>
