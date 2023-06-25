@@ -7,7 +7,7 @@ export default function LoadingSplash(){
     const [finished, setFinished] = useState(false)
 
     function handleFinished(){
-        setFinished(true);
+        // setFinished(true);
     }
 
     useEffect(() => {
@@ -18,8 +18,9 @@ export default function LoadingSplash(){
         finished ? (
             null
         ) : (
-
+            
             <div className='SplashContainer'>
+                <div className='loader'></div>
                 <h2 className={`${poppins.className} title`}>{'Aerobuddy'}</h2>
             </div>
         )
