@@ -1,4 +1,34 @@
 
+/* Splash Screen */
+
+.SplashContainer{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vw;
+    background-color: white;
+    z-index: 100;
+    color: black;
+    animation: simple-fade 0.5s 0.3s linear forwards;
+}
+
+.title{
+    font-size: 50px;
+}
+
+@keyframes simple-fade {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Clients */
+
 .ClientsArea{
     display: flex;
     width: 100%;
@@ -46,14 +76,14 @@
     }
   }
 
-  @keyframes grayscale-animation-reverse {
+@keyframes grayscale-animation-reverse {
     0% {
         filter: saturate(100%) contrast(100%);
     }
     100% {
         filter: saturate(0%) contrast(30%);
     }
-  }
+}
 
 .UseCases{
     text-align: center;
