@@ -10,6 +10,8 @@ import UseCases from '@/components/UseCases'
 import Technology from '@/components/Technology'
 import Integration from '@/components/Integration'
 import Splash from '@/components/LoadingSplash'
+import Support from '@/components/Support'
+import Channels from '@/components/Channels'
 
 
 
@@ -75,12 +77,22 @@ export default async function Home() {
   const usecasesData = getSectionData('UseCases')
   const technologyData = getSectionData('Technology')
   const integrationData = getSectionData('Integration')
+  const supportData = getSectionData('Support')
+  const channelsData = getSectionData('Channels')
 
-  const [banner, client, usecases, technology, integration] = await Promise.all([bannerData, clientsData, usecasesData, technologyData, integrationData])
+  const [banner, client, usecases, technology, integration, support, channels] = await Promise.all([bannerData, clientsData, usecasesData, technologyData, integrationData, supportData, channelsData])
 
-  let allData = [banner, client, usecases, technology, integration]
+  const allData = [banner, client, usecases, technology, integration, support, channels]
 
-  const sIndex = {banner: 0, clients: 1, usecases: 2, technology: 3, integration: 4}
+  const sIndex = {
+    banner: 0, 
+    clients: 1, 
+    usecases: 2, 
+    technology: 3, 
+    integration: 4, 
+    support: 5, 
+    channels: 6
+  }
 
   function getText(groupIndex:number, index:number){
     //@ts-ignore
@@ -135,6 +147,18 @@ export default async function Home() {
       getObject(sIndex.integration, 1),
       getObject(sIndex.integration, 2),
       getObject(sIndex.integration, 3),
+    ],
+    support:[
+      getObject(sIndex.support, 0),
+      getObject(sIndex.support, 1),
+      getObject(sIndex.support, 2),
+      getObject(sIndex.support, 3),
+    ],
+    channels:[
+      getObject(sIndex.channels, 0),
+      getObject(sIndex.channels, 1),
+      getObject(sIndex.channels, 2),
+      getObject(sIndex.channels, 3),
     ]
   }
 
@@ -147,6 +171,8 @@ export default async function Home() {
       <UseCases notion={content.usecases}></UseCases>
       <Technology notion={content.technology}></Technology>
       <Integration notion={content.integration}></Integration>
+      <Support notion={content.support}></Support>
+      <Channels notion={content.channels}></Channels>
       
       <div style={{height: '1000px'}}>
       </div>

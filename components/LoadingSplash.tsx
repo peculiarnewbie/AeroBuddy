@@ -11,7 +11,7 @@ export default function LoadingSplash(){
     }
 
     useEffect(() => {
-        setTimeout(handleFinished, 1000)
+        setTimeout(handleFinished, 700)
     })
 
     return(
