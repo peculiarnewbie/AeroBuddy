@@ -118,11 +118,16 @@
 }
 
 .ClientsItemsimg{
+    visibility: hidden;
     flex-shrink: 0;
     max-width: 100%;
     max-height: 100%;
     filter: saturate(0%) contrast(30%);
     animation: grayscale-animation-reverse 0.25s ease-in-out forwards;
+}
+
+.ClientsItemsimg.loaded{
+    visibility: visible;
 }
 
 .ClientsItemsimg:hover{
@@ -543,12 +548,12 @@
 
 .ChannelsItemsContainer{
     display: flex;
-    flex-wrap: wrap;
     gap: 30px;
     flex-direction: row;
 }
 
 .ChannelsItem{
+    cursor: pointer;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -574,8 +579,8 @@
 }
 
 .ChannelsImgContainer{
-    display: flex;
-    justify-content: center;
+    display: none;
+    justify-content: left;
     align-items: center;
     width: 100%;
     flex-shrink: 5;
@@ -583,10 +588,19 @@
     position: relative;
 }
 
+.ChannelsImgContainer.active{
+    display: flex;
+}
+
 .ChannelsImg{
+    visibility: hidden;
     flex-shrink: 0;
     max-width: 100%;
     max-height: 100%;
+}
+
+.ChannelsImg.loaded{
+    visibility: visible;
 }
 
 @media screen and (max-width: 599px) {
@@ -612,6 +626,10 @@
 }
 
 @media screen and (min-width:992px) and (max-width: 1199px) {
+    .ChannelsItem{
+        width: 290px;
+    }
+
     .ChannelsImg{
         width: 610px;
         height: 496px;
@@ -624,9 +642,10 @@
 }
 
 @media screen and (min-width:1200px) and (max-width: 1550px) {
+    
     .ChannelsImg{
-        width: 610px;
-        height: 496px;
+        width: 770px;
+        height: 625px;
         margin-right: -200px;
         position: relative;
         max-width: 1000%;
