@@ -7,11 +7,11 @@ export default function LoadingSplash(){
     const [finished, setFinished] = useState(false)
 
     function handleFinished(){
-        // setFinished(true);
+        setFinished(true);
     }
 
     useEffect(() => {
-        setTimeout(handleFinished, 1000)
+        setTimeout(handleFinished, 700)
     })
 
     return(
