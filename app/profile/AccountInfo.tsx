@@ -1,13 +1,8 @@
 import { useSession } from "next-auth/react";
 
-export default function AccountInfo(){
+export default function AccountInfo({session} : {session: any}){
 
-    const { data: session } = useSession()
-    const { status } = useSession({ required: true })
-
-    console.log(status)
-
-    return ( session && status === 'authenticated' &&
+    return ( session &&
             <div>
                 <h1>Account Info</h1>
                 <p>Email: {session?.user?.email}</p>

@@ -167,7 +167,6 @@ export default async function Home() {
         <Splash></Splash>
         <Header session={session}></Header>
         <Banner notion={content.banner}></Banner>
-        <p>{JSON.stringify(session)}</p>
         <Clients notion={content.clients}></Clients>
         <UseCases notion={content.usecases}></UseCases>
         <Technology notion={content.technology}></Technology>
