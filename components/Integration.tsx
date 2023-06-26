@@ -23,7 +23,7 @@ export default function Integration({notion} : {notion:any}){
                     {ucItems.map((item:any, index:number) => (
                         <div className={`IntegrationItem p${index}`} key={index}>
                             <div className='IntegrationImgContainer'>
-                                <img className='IntegrationImg' src={item.img} alt="usecases"></img>
+                                <img loading="lazy" className='IntegrationImg' src={item.img} alt="usecases" ></img>
                             </div>
                             <div className='IntegrationText'>
                                 <h4 className={`${poppins.className}`} style={{fontSize:'24px', fontWeight:'500'}}>{item.h}</h4>

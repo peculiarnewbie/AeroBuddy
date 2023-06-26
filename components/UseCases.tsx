@@ -23,7 +23,7 @@ export default function UseCases({notion} : {notion:any}){
                     {ucItems.map((item:any, index:number) => (
                         <div className='UseCasesItem' key={index}>
                             <div className='UseCasesImgContainer'>
-                                <img className='UseCasesImg' src={item.img} alt="usecases"></img>
+                                <img loading="lazy" className='UseCasesImg' src={item.img} alt="usecases" ></img>
                             </div>
                             <h4 className={`${poppins.className}`} style={{margin:'0 0 18px', fontWeight:'600'}}>{item.h}</h4>
                             <p className={`${poppins.className}`} >{item.p}</p>

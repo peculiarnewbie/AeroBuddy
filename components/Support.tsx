@@ -12,7 +12,7 @@ export default function Support({notion} : {notion:any}){
             <div className="Container SupportContainer">
                 <div className="SupportImgContainer">
                     <div className="ImgDecor"></div>
-                    <img className='SupportImg' src={notion[0].img} alt="support"></img>
+                    <img loading="lazy" className='SupportImg' src={notion[0].img} alt="support" ></img>
                 </div>
                 <div className={`${poppins.className} SupportText`}>
                     <h2 style={{fontSize: '34px', fontWeight: '500', marginBottom: '25px'}}>{notion[0].h}</h2>

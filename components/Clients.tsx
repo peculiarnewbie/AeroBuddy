@@ -15,6 +15,7 @@ export default function Clients({notion} : {notion:any}){
 
     function CheckLoaded(){
         if(!loaded){
+            console.log('checking')
             let i=0
             let allLoaded = true;
             let newLoaded = imgLoaded
@@ -40,8 +41,6 @@ export default function Clients({notion} : {notion:any}){
 
     useEffect(() => {
         if(loaded){
-            console.log('clearing')
-            console.log(loaded)
             clearInterval(intervalId)
         }
         else{
@@ -57,7 +56,7 @@ export default function Clients({notion} : {notion:any}){
             <div className='ClientsArea'>
                 {notion.map((item:any, index:number) => (
                     <div key={index} className='ClientsItem'>
-                        <img className={`ClientsItemsimg ${imgLoaded[index] ? 'loaded' : ''}`} src={item} alt='airport' />
+                        <img loading="lazy" className={`ClientsItemsimg ${imgLoaded[index] ? 'loaded' : ''}`} src={item} alt='airport'  />
                     </div>
                 ))}
             </div>

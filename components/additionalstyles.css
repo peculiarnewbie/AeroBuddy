@@ -12,9 +12,13 @@
     background-color: white;
     z-index: 100;
     color: black;
-    -webkit-animation: simple-fade 0.3s ease-out 0.4s forwards;;
-    animation: simple-fade 0.3s ease-out 0.4s forwards;
+    
     pointer-events: none;
+}
+
+.SplashContainer.finished{
+    -webkit-animation: simple-fade 0.3s ease-out 0.4s forwards;
+    animation: simple-fade 0.3s ease-out 0.4s forwards;
 }
 
 .title{
@@ -47,8 +51,8 @@
     border-radius: 50%;
     border: 3px solid transparent;
     border-top-color: black;
-    -webkit-animation: spin 2s ease-in-out infinite;
-    animation: spin 2s ease-in-out infinite;
+    -webkit-animation: spin 1.5s ease-in-out infinite;
+    animation: spin 1.5s ease-in-out infinite;
 }
 .loader:after {
     content: "";
@@ -60,8 +64,8 @@
     border-radius: 50%;
     border: 3px solid transparent;
     border-top-color: black;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
+    -webkit-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
 }
 @-webkit-keyframes spin {
     0%   {
