@@ -13,17 +13,15 @@ import Splash from '@/components/LoadingSplash'
 import Support from '@/components/Support'
 import Channels from '@/components/Channels'
 
-
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
 
 
 export default async function Home() {
-  
-  const notion = new Client({
-    auth: process.env.NOTION_KEY,
-  })
 
-  
+  const session = await getServerSession(authOptions);
+  console.log('session:', session);
   
   async function getSectionData(section:string){
 
@@ -167,7 +165,7 @@ export default async function Home() {
   return (
     <main className={styles.main} style={{justifyContent: 'start'}}>
         <Splash></Splash>
-        <Header></Header>
+        <Header session={session}></Header>
         <Banner notion={content.banner}></Banner>
         <Clients notion={content.clients}></Clients>
         <UseCases notion={content.usecases}></UseCases>
