@@ -1,3 +1,4 @@
+'use client'
 import './styles.css'
 import Image from 'next/image'
 import logo from '../public/aiairport-black-transparent.png'
@@ -5,7 +6,9 @@ import logo from '../public/aiairport-black-transparent.png'
 import Navbar from './Navbar'
 import HeaderShadow from './HeaderShadow'
 
-export default function Header(){
+import { SessionProvider } from "next-auth/react"
+
+export default function Header(session:any){
     return (
         <header className="Header">
             <div className='Container HeaderContainer' style={{display:'flex', flexWrap:'wrap', alignItems: 'center'}}>
@@ -19,11 +22,13 @@ export default function Header(){
                     />
 
                 </div>
-                <Navbar></Navbar>
+                <SessionProvider session={session}>
+                    <Navbar></Navbar>
+                </SessionProvider>
                 
                 
             </div>
-            <HeaderShadow></HeaderShadow>
+                <HeaderShadow></HeaderShadow>
         </header>
     )
 }

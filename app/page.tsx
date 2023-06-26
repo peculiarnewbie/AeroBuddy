@@ -15,6 +15,8 @@ import Channels from '@/components/Channels'
 
 
 
+
+
 export default async function Home() {
   
   const notion = new Client({
@@ -164,19 +166,19 @@ export default async function Home() {
 
   return (
     <main className={styles.main} style={{justifyContent: 'start'}}>
-      <Splash></Splash>
-      <Header></Header>
-      <Banner notion={content.banner}></Banner>
-      <Clients notion={content.clients}></Clients>
-      <UseCases notion={content.usecases}></UseCases>
-      <Technology notion={content.technology}></Technology>
-      <Integration notion={content.integration}></Integration>
-      <Support notion={content.support}></Support>
-      <Channels notion={content.channels}></Channels>
-      
-      <div style={{height: '1000px'}}>
-      </div>
-      <p>whaa</p>
+        <Splash></Splash>
+        <Header></Header>
+        <Banner notion={content.banner}></Banner>
+        <Clients notion={content.clients}></Clients>
+        <UseCases notion={content.usecases}></UseCases>
+        <Technology notion={content.technology}></Technology>
+        <Integration notion={content.integration}></Integration>
+        <Support notion={content.support}></Support>
+        <Channels notion={content.channels}></Channels>
+        
+        <div style={{height: '1000px'}}>
+        </div>
+        <p>whaa</p>
     </main>
   )
 }

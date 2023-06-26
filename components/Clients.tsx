@@ -6,51 +6,26 @@ import { useEffect, useState } from 'react';
 
 export default function Clients({notion} : {notion:any}){
 
-    const [imgLoaded, setimgLoaded] = useState(Array.from({ length: notion.length }, () => false))
+    const [imgLoaded, setimgLoaded] = useState(Array.from({ length: notion.length }, () => true))
 
     const[loaded, setLoaded] = useState(false);
-    const[update, setUpdated] = useState(false)
-
-    let intervalId:any
-
-    function CheckLoaded(){
-        if(!loaded){
-            console.log('checking')
-            let i=0
-            let allLoaded = true;
-            let newLoaded = imgLoaded
-            //@ts-ignore
-            notion.forEach(item => {
-                var image = new Image();
-                image.src = item;
-                if(image.complete) newLoaded[i] = true
-                else{
-                    allLoaded = false;
-                }
-                i = i+1
-            });
-            setimgLoaded(newLoaded);
-            setUpdated(!update)
-            setLoaded(allLoaded)
-        }
-    }
 
     useEffect(() => {
-        
+        async function WaitForJS(){
+            await new Promise((resolve) => {
+                let intervalId = setInterval(() => {
+                    if(window.document.readyState === 'complete'){
+                        resolve(clearInterval(intervalId))
+                    }
+                }, 100)
+            })
+            setLoaded(true)
+        }
+
+        WaitForJS()
+
     }, [])
-
-    useEffect(() => {
-        if(loaded){
-            clearInterval(intervalId)
-        }
-        else{
-            intervalId = setInterval(() => CheckLoaded(), 10)
-        }
-        return () => {
-            clearInterval(intervalId);
-          };
-    }, [loaded])
-
+    
     return(
         <section className="Container">
             <div className='ClientsArea'>

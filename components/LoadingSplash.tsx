@@ -4,32 +4,31 @@ import './additionalstyles.css'
 import { poppins } from '@/app/fonts'
 
 export default function LoadingSplash(){
-    const [loading, setLoading] = useState(true);
     const [finished, setFinished] = useState(false)
 
 
     useEffect(() => {
-        const handleResize = () => {
-            setLoading(false)
-            setFinished(false)
-        };
+        async function WaitForJS(){
+            await new Promise((resolve) => {
+                let intervalId = setInterval(() => {
+                    if(window.document.readyState === 'complete'){
+                        resolve(clearInterval(intervalId))
+                    }
+                }, 100)
+            })
+            setFinished(true)
+        }
 
-      
-          window.addEventListener("resize", handleResize);
-          handleResize();
-          
-  
-          return () => {
-            window.removeEventListener("resize", handleResize);
-          };
-      }, []);
+        WaitForJS()
+
+    }, [])
 
     return(
         finished ? (
             null
         ) : (
             
-            <div className={`SplashContainer ${loading ? '' : 'finished'}`}>
+            <div className={`SplashContainer ${finished ? 'finished' : ''}`}>
                 <div className='loader'></div>
                 <h2 className={`${poppins.className} title`}>{'Aerobuddy'}</h2>
             </div>

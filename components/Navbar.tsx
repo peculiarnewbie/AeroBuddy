@@ -4,9 +4,15 @@ import { useState, useEffect } from 'react'
 import { poppins } from '@/app/fonts'
 import './styles.css'
 
+import { useSession, signIn, signOut } from "next-auth/react"
+
 export default function Navbar(){
     const [show, setShow] = useState(false)
     const [burgerOpened, setburgerOpened] = useState(false)
+
+    const { data: session } = useSession()
+
+    console.log(session);
 
     useEffect(() => {
         const handleResize = () => {
@@ -63,7 +69,13 @@ export default function Navbar(){
                         <button className='Navbar-button'>Clients</button>
                     </div>
                 </div>
-                <button className={`${poppins.className} Navbar-login`}>Log in</button>
+                {
+                    session ? (
+                        <button className={`${poppins.className} Navbar-login`} onClick={() => signIn()}>Log in</button>
+                        ) : (
+                            <button className={`${poppins.className} Navbar-login`} onClick={() => signOut()}>Log out</button>
+                            )
+                }
             </div>
         </>
     )
