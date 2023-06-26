@@ -71,10 +71,10 @@ export default function Navbar(){
                 </div>
                 {
                     session ? (
-                        <button className={`${poppins.className} Navbar-login`} onClick={() => signIn()}>Log in</button>
-                        ) : (
                             <button className={`${poppins.className} Navbar-login`} onClick={() => signOut()}>Log out</button>
-                            )
+                        ) : (
+                            <button className={`${poppins.className} Navbar-login`} onClick={() => signIn()}>Log in</button>
+                        )
                 }
             </div>
         </>

@@ -8,7 +8,7 @@ import HeaderShadow from './HeaderShadow'
 
 import { SessionProvider } from "next-auth/react"
 
-export default function Header(session:any){
+export default function Header({session} : {session:any}){
     return (
         <header className="Header">
             <div className='Container HeaderContainer' style={{display:'flex', flexWrap:'wrap', alignItems: 'center'}}>
