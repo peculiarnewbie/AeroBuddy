@@ -13,13 +13,15 @@ export default function Header({session} : {session:any}){
         <header className="Header">
             <div className='Container HeaderContainer' style={{display:'flex', flexWrap:'wrap', alignItems: 'center'}}>
                 <div className="Navbar-logo">
-                    <Image
-                        src={logo}
-                        alt="Brand"
-                        fill
-                        priority = {true}
-                        placeholder="blur"
-                    />
+                    <a href="/">
+                        <Image
+                            src={logo}
+                            alt="Brand"
+                            fill
+                            priority = {true}
+                            placeholder="blur"
+                        />
+                    </a>
 
                 </div>
                 <SessionProvider session={session}>

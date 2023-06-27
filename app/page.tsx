@@ -12,9 +12,11 @@ import Integration from '@/components/Integration'
 import Splash from '@/components/LoadingSplash'
 import Support from '@/components/Support'
 import Channels from '@/components/Channels'
+import Testimonial from '@/components/Testimonial'
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { get } from 'http'
 
 
 
@@ -23,7 +25,25 @@ export default async function Home() {
   const session = await getServerSession(authOptions);
   console.log('session:', session);
   
-  async function getSectionData(section:string){
+  async function getSectionData(section:string, database?:string){
+
+    const body = database ? JSON.stringify({
+      "sorts": [{
+        "property": "index",
+        "direction": "ascending"
+      }]
+    }) : JSON.stringify({
+      "filter" : {
+        "property": "Section",
+        "select": {
+            "equals": section
+        },
+      },
+      "sorts": [{
+        "property": "index",
+        "direction": "ascending"
+        }]
+    })
 
     const options = {
       method: 'POST',
@@ -34,41 +54,16 @@ export default async function Home() {
         'Authorization': `Bearer ${process.env.NOTION_KEY}`
       },
       next: { tags: ['content'] },
-      body: JSON.stringify(
-        {
-          "filter" : {
-            "property": "Section",
-            "select": {
-                "equals": section
-            },
-          },
-          "sorts": [{
-            "property": "index",
-            "direction": "ascending"
-          }]
-       })
+      body: body
     };
 
     //@ts-ignore
-    const raw = await fetch(`https://api.notion.com/v1/databases/${process.env.NOTION_DATABASE_ID}/query`, options)
+    const raw = await fetch(`https://api.notion.com/v1/databases/${database ? process.env.NOTION_TESTIMONIALS_ID : process.env.NOTION_DATABASE_ID}/query`, options)
 
     const response = await raw.json()
 
     console.log('fetched', section);
 
-    // const response = await notion.databases.query({
-    //   database_id: process.env.NOTION_DATABASE_ID ? process.env.NOTION_DATABASE_ID : "",
-    //   filter:{
-    //     select: {equals: section},
-    //     property: 'Section',
-    //   },
-    //   sorts:[
-    //     {
-    //       property: 'index',
-    //       direction: 'ascending',
-    //     }
-    //   ],
-    // })
     return response;
   }
 
@@ -79,10 +74,12 @@ export default async function Home() {
   const integrationData = getSectionData('Integration')
   const supportData = getSectionData('Support')
   const channelsData = getSectionData('Channels')
+  const testimonialHeadingData = getSectionData('Testimonials')
+  const testimonialData = getSectionData('Testimonial', 'Testimonials')
 
-  const [banner, client, usecases, technology, integration, support, channels] = await Promise.all([bannerData, clientsData, usecasesData, technologyData, integrationData, supportData, channelsData])
+  const [banner, client, usecases, technology, integration, support, channels, testimonialHeading, testimonials] = await Promise.all([bannerData, clientsData, usecasesData, technologyData, integrationData, supportData, channelsData, testimonialHeadingData, testimonialData])
 
-  const allData = [banner, client, usecases, technology, integration, support, channels]
+  const allData = [banner, client, usecases, technology, integration, support, channels, testimonialHeading, testimonials]
 
   const sIndex = {
     banner: 0, 
@@ -91,7 +88,9 @@ export default async function Home() {
     technology: 3, 
     integration: 4, 
     support: 5, 
-    channels: 6
+    channels: 6,
+    testimonialHeading: 7,
+    testimonials: 8
   }
 
   function getText(groupIndex:number, index:number){
@@ -114,6 +113,14 @@ export default async function Home() {
 
   function getObject(groupIndex:number, index:number){
     return {h: getText(groupIndex, index), p: getAltText(groupIndex, index), img: getImage(groupIndex, index)}
+  }
+
+  function getTestimonial(groupIndex:number, index:number){
+    return {personName: allData[groupIndex].results[index]?.properties.PersonName.rich_text[0]?.plain_text,
+      position : allData[groupIndex].results[index]?.properties.Position.rich_text[0]?.plain_text,
+      comment: allData[groupIndex].results[index]?.properties.Comment.rich_text[0]?.plain_text,
+      img: allData[groupIndex].results[index]?.properties.Picture?.url
+    }
   }
 
   const content = {
@@ -159,6 +166,12 @@ export default async function Home() {
       getObject(sIndex.channels, 1),
       getObject(sIndex.channels, 2),
       getObject(sIndex.channels, 3),
+    ],
+    testimonials:[
+      getObject(sIndex.testimonialHeading, 0),
+      getTestimonial(sIndex.testimonials, 0),
+      getTestimonial(sIndex.testimonials, 1),
+      getTestimonial(sIndex.testimonials, 2),
     ]
   }
 
@@ -173,6 +186,7 @@ export default async function Home() {
         <Integration notion={content.integration}></Integration>
         <Support notion={content.support}></Support>
         <Channels notion={content.channels}></Channels>
+        <Testimonial notion={content.testimonials}></Testimonial>
         
         <div style={{height: '1000px'}}>
         </div>

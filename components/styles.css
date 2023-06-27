@@ -56,8 +56,8 @@
     width: 100%;
     position: relative;
     margin-left: 30px;
-    justify-content: space-between;
-    gap: 10px;
+    justify-content: flex-end;
+    gap: 45px;
 }
 
 
@@ -177,10 +177,11 @@
         margin-left: 0px;
         flex-direction: column;
         font-family: var(--font-poppins-semi-bold);
+        gap: 15px;
     }
 
     .Navbar-login{
-        margin-left: 0px;
+        margin: 15px 0;
     }
 
     .Header{
@@ -198,6 +199,9 @@
 @media screen and (min-width: 992px) and (max-width: 1199px) {
     .Container {
         width: 960px;
+    }
+    .Navbar-buttons{
+        gap: 20px;
     }
 }
 

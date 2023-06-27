@@ -5,14 +5,15 @@ import { poppins } from '@/app/fonts'
 import './styles.css'
 
 import { useSession, signIn, signOut } from "next-auth/react"
+import { usePathname } from 'next/navigation';
 
 export default function Navbar(){
     const [show, setShow] = useState(false)
     const [burgerOpened, setburgerOpened] = useState(false)
 
-    const { data: session } = useSession()
+    const pathname = usePathname();
 
-    console.log(session);
+    const { data: session } = useSession()
 
     useEffect(() => {
         const handleResize = () => {
@@ -50,24 +51,36 @@ export default function Navbar(){
             <div className={`Collapse ${show ? 'show' : ''} Navbar-main`}>
 
                 <div className={`${poppins.className} Navbar-buttons`}>
-                    <div className='Navbar-item'>
-                        <button className='Navbar-button'>Use-cases</button>
-                    </div>
-                    <div className='Navbar-item'>
-                        <button className='Navbar-button'>Technology</button>
-                    </div>
-                    <div className='Navbar-item'>
-                        <button className='Navbar-button'>Integration</button>
-                    </div>
-                    <div className='Navbar-item'>
-                        <button className='Navbar-button'>Support</button>
-                    </div>
-                    <div className='Navbar-item'>
-                        <button className='Navbar-button'>Channels</button>
-                    </div>
-                    <div className='Navbar-item'>
-                        <button className='Navbar-button'>Clients</button>
-                    </div>
+                    {( !session && pathname == '/' ? 
+                        <>
+                            <div className='Navbar-item'>
+                                <button className='Navbar-button'>Use-cases</button>
+                            </div>
+                            <div className='Navbar-item'>
+                                <button className='Navbar-button'>Technology</button>
+                            </div>
+                            <div className='Navbar-item'>
+                                <button className='Navbar-button'>Integration</button>
+                            </div>
+                            <div className='Navbar-item'>
+                                <button className='Navbar-button'>Support</button>
+                            </div>
+                            <div className='Navbar-item'>
+                                <button className='Navbar-button'>Channels</button>
+                            </div>
+                            <div className='Navbar-item'>
+                                <button className='Navbar-button'>Clients</button>
+                            </div>
+                        
+                        </> : <>
+                            <div className='Navbar-item'>
+                                <a className='Navbar-button' href='/applications/lookerstudio'>Looker Studio</a>
+                            </div>
+                            <div className='Navbar-item'>
+                                <a className='Navbar-button' href='/applications/theotherapp'>The Other App</a>
+                            </div>
+                        </>
+                    )}
                 </div>
                 {
                     session ? (
