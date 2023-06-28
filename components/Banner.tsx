@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import './styles.css'
+import './entry.css'
 
 import { poppins } from '@/app/fonts'
 import BannerEmail from './BannerEmail'
@@ -32,16 +33,16 @@ export default function Banner({notion} : {notion:any}){
         <section className='Banner-Area'>
             <div className='Container Banner-Container'>
                 <div className='Content1'>
-                    <h2 className={`${poppins.className} Content1H2 ${loading ? '' : 'slide-in-left animation-delay-1'} `}>
+                    <h2 className={`${poppins.className} Content1H2 ${loading ? '' : 'slide-in-left'} `}>
                         {notion.h2}   
                     </h2>
-                    <p className={`Content1p ${loading ? '' : 'slide-in-left animation-delay-2'}`}>
+                    <p className={`Content1p ${loading ? '' : 'slide-in-left animation-delay-1'}`}>
                         {notion.p}
                     </p>
                     <BannerEmail loading={loading}></BannerEmail>
                 </div>
                 <div className='Content1ImageContainer'>
-                    <div className={`Content1Image ${loading ? '' : 'slide-in-right animation-delay-1'}`}>
+                    <div className={`Content1Image ${loading ? '' : 'slide-in-right '}`}>
                         <Image
                             src={content1}
                             alt="1st Content"

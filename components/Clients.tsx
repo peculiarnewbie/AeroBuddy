@@ -3,6 +3,7 @@
 import './styles.css'
 import './additionalstyles.css'
 import { useEffect, useState } from 'react';
+import SlideOnIntersect from './SlideOnIntersect';
 
 export default function Clients({notion} : {notion:any}){
 
@@ -30,9 +31,12 @@ export default function Clients({notion} : {notion:any}){
         <section className="Container">
             <div className='ClientsArea'>
                 {notion.map((item:any, index:number) => (
+                    <SlideOnIntersect direction='left' delay={index + 1} fit={true}>
+                        
                     <div key={index} className='ClientsItem'>
                         <img loading="lazy" className={`ClientsItemsimg ${imgLoaded[index] ? 'loaded' : ''}`} src={item} alt='airport'  />
                     </div>
+                    </SlideOnIntersect>
                 ))}
             </div>
         </section>

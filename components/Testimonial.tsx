@@ -66,7 +66,7 @@ export default function Testimonial({notion} : {notion:any}){
         let position
         if(next) position = scrollLeft - 720
         else position = scrollLeft + 720
-        if(position > -1440) position = position - 720 * ucItems.length
+        if(position > -1440) {position = position - 720 * ucItems.length}
         else if (position < -1440 - 720 * (ucItems.length)) position = position + 720 * (ucItems.length)
         handleCenterItem(position)
     }
