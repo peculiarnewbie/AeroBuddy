@@ -34,22 +34,23 @@ export default function Banner({notion} : {notion:any}){
             <div className='Container Banner-Container'>
                 <div className='Content1'>
                     <h2 className={`${poppins.className} Content1H2 ${loading ? '' : 'slide-in-left'} `}>
-                        {notion.h2}   
+                        {notion[0].h}   
                     </h2>
                     <p className={`Content1p ${loading ? '' : 'slide-in-left animation-delay-1'}`}>
-                        {notion.p}
+                        {notion[0].p}
                     </p>
                     <BannerEmail loading={loading}></BannerEmail>
                 </div>
                 <div className='Content1ImageContainer'>
                     <div className={`Content1Image ${loading ? '' : 'slide-in-right '}`}>
-                        <Image
+                        {/* <Image
                             src={content1}
                             alt="1st Content"
                             fill
                             priority = {true}
                             placeholder="blur"
-                        ></Image>
+                        ></Image> */}
+                        <img className='Bannerimg' loading="lazy" src={notion[0].img} alt="1st Content"></img>
                     </div>
                 </div>
             </div>
