@@ -8,10 +8,10 @@ export default async function(){
     const session = await getServerSession(authOptions);
 
     return (
-    <>
+    <div style={{backgroundColor:'white'}}>
         <Header session={session}></Header>
         {(session ?
-            <div style={{display: 'flex',}}>
+            <div style={{paddingTop: '93px', display: 'flex',}}>
                 <iframe style={{width: '100vw', height:'100vh'}} src="https://lookerstudio.google.com/embed/u/1/reporting/54e2fcc2-06e6-421a-8a66-c00471e8f260/page/p_hbuco6fc7c"></iframe> 
             </div>
         : <div style={{
@@ -20,9 +20,9 @@ export default async function(){
             alignItems: 'center',
             height: '100vh',
         }}>
-            <h1>Not Signed in</h1>
+            <h1 style={{color:'black'}}>Not Signed in</h1>
         </div>
         )}
-    </>
+    </div>
     )
 }
