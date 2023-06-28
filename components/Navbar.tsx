@@ -77,7 +77,7 @@ export default function Navbar(){
                                 <a className='Navbar-button' href='/applications/lookerstudio'>Looker Studio</a>
                             </div>
                             <div className='Navbar-item'>
-                                <a className='Navbar-button' href='/applications/theotherapp'>The Other App</a>
+                                <a className='Navbar-button' href='/applications/prompt'>Prompt app</a>
                             </div>
                         </>
                     )}
