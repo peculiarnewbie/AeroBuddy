@@ -17,6 +17,7 @@ import Testimonial from '@/components/Testimonial'
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { get } from 'http'
+import ConsoleLogger from '@/components/ConsoleLogger'
 
 
 
@@ -124,11 +125,7 @@ export default async function Home() {
   }
 
   const content = {
-    banner: {
-      h2 : getText(sIndex.banner, 0),
-      p: getText(sIndex.banner, 1),
-      c: getText(sIndex.banner, 2)
-    },
+    banner: [getObject(sIndex.banner, 0)],
     clients:[
       getImage(sIndex.clients, 0),
       getImage(sIndex.clients, 1),
@@ -187,6 +184,7 @@ export default async function Home() {
         <Support notion={content.support}></Support>
         <Channels notion={content.channels}></Channels>
         <Testimonial notion={content.testimonials}></Testimonial>
+        {/* <ConsoleLogger data={client}></ConsoleLogger> */}
         
         <div style={{height: '1000px'}}>
         </div>
