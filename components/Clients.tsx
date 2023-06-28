@@ -31,9 +31,9 @@ export default function Clients({notion} : {notion:any}){
         <section className="Container">
             <div className='ClientsArea'>
                 {notion.map((item:any, index:number) => (
-                    <SlideOnIntersect direction='left' delay={index + 1} fit={true}>
+                    <SlideOnIntersect direction='left' delay={index + 1} fit={true} key={index}>
                         
-                    <div key={index} className='ClientsItem'>
+                    <div className='ClientsItem'>
                         <img loading="lazy" className={`ClientsItemsimg ${imgLoaded[index] ? 'loaded' : ''}`} src={item} alt='airport'  />
                     </div>
                     </SlideOnIntersect>

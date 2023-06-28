@@ -24,8 +24,8 @@ export default function Support({notion} : {notion:any}){
                     </SlideOnIntersect>
                     <ul className="SupportItemsContainer">
                         {ucItems.map((item:any, index:number) => (
-                            <SlideOnIntersect direction='up' delay={1} fit>
-                                <li className='SupportItems' key={index}>
+                            <SlideOnIntersect direction='up' delay={1} fit key={index}>
+                                <li className='SupportItems' >
                                     <p  >{item.h}</p>
                                 </li>
                             </SlideOnIntersect>
