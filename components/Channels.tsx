@@ -74,8 +74,8 @@ export default function Channels({notion} : {notion:any}){
                 <Tabs.Root className='ChannelsItemsContainer' defaultValue="tab1" orientation="vertical">
                     <Tabs.List className='ChannelsItemsSelection' aria-label="tabs example">
                         {ucItems.map((item:any, index:number) => (
-                            <SlideOnIntersect direction='up' delay={1}>
-                            <Tabs.Trigger className={`ChannelsItem${selected == index ? ' active' : ''}`} value={`tab${index}`} onClick={() => handleClick(index)} key={index}>
+                            <SlideOnIntersect direction='up' delay={1} key={index}>
+                            <Tabs.Trigger className={`ChannelsItem${selected == index ? ' active' : ''}`} value={`tab${index}`} onClick={() => handleClick(index)} >
                                 <h4 className={`${poppins.className}`} style={{margin:'0 0 18px', fontWeight:'500', fontSize: '17px'}}>{item.h}</h4>
                                 <p className={`${poppins.className}`} style={{color: 'inherit', fontWeight:'300', fontSize: '15px'}} >{item.p}</p>
                             </Tabs.Trigger>
