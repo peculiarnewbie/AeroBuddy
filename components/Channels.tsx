@@ -6,12 +6,12 @@ import { useState, useEffect } from 'react';
 import * as Tabs  from '@radix-ui/react-tabs';
 
 import { poppins } from '@/app/fonts';
+import SlideOnIntersect from './SlideOnIntersect';
 
 export default function Channels({notion} : {notion:any}){
 
     const ucItems = notion.slice(1);
 
-    const [inView, setInView] = useState(false);
     const [selected, setSelected] = useState(0)
 
     const [imgLoaded, setimgLoaded] = useState(Array.from({ length: ucItems.length }, () => false))
@@ -66,16 +66,20 @@ export default function Channels({notion} : {notion:any}){
         <section className='Channels'>
             <div className="Container" style={{height: '100%', color: 'black'}}>
                 <div style={{marginBottom:'70px'}}>
+                    <SlideOnIntersect direction='up' delay={1}>
                     <h3 className={`${poppins.className}`} style={{marginBottom:'8px'}}>{notion[0].h}</h3>
                     <p className={`${poppins.className}`} style={{marginBottom:'15px'}}>{notion[0].p}</p>
+                    </SlideOnIntersect>
                 </div>
                 <Tabs.Root className='ChannelsItemsContainer' defaultValue="tab1" orientation="vertical">
                     <Tabs.List className='ChannelsItemsSelection' aria-label="tabs example">
                         {ucItems.map((item:any, index:number) => (
+                            <SlideOnIntersect direction='up' delay={1}>
                             <Tabs.Trigger className={`ChannelsItem${selected == index ? ' active' : ''}`} value={`tab${index}`} onClick={() => handleClick(index)} key={index}>
                                 <h4 className={`${poppins.className}`} style={{margin:'0 0 18px', fontWeight:'500', fontSize: '17px'}}>{item.h}</h4>
                                 <p className={`${poppins.className}`} style={{color: 'inherit', fontWeight:'300', fontSize: '15px'}} >{item.p}</p>
                             </Tabs.Trigger>
+                            </SlideOnIntersect>
                         ))}
 
                         {/* <Tabs.Trigger value="tab1">One</Tabs.Trigger>

@@ -5,6 +5,7 @@ import './additionalstyles.css'
 import { useState } from 'react';
 
 import { poppins } from '@/app/fonts';
+import SlideOnIntersect from './SlideOnIntersect';
 
 export default function Technology({notion} : {notion:any}){
 
@@ -16,19 +17,24 @@ export default function Technology({notion} : {notion:any}){
         <section className='Technology'>
             <div className="Container" style={{height: '100%', color: 'black'}}>
                 <div style={{marginBottom:'70px'}}>
-                    <h3 className={`${poppins.className}`} style={{fontWeight:'300', fontSize:'34'}}>{notion[0].h}</h3>
-                    <h3 className={`${poppins.className}`} style={{marginBottom:'15px', fontSize:'34'}}>{notion[0].p}</h3>
+                    <SlideOnIntersect direction='up' delay={1}>
+                        <h3 className={`${poppins.className}`} style={{fontWeight:'300', fontSize:'34'}}>{notion[0].h}</h3>
+                        <h3 className={`${poppins.className}`} style={{marginBottom:'15px', fontSize:'34'}}>{notion[0].p}</h3>
+                    </SlideOnIntersect>
                 </div>
                 <div className='TechnologyItemsContainer'>
                     {ucItems.map((item:any, index:number) => (
                         <div className='TechnologyItem' key={index}>
-                            <div className='TechnologyImgContainer'>
-                                <img loading="lazy" className='TechnologyImg' src={item.img} alt="usecases" ></img>
-                            </div>
-                            <div className='TechnologyText'>
-                                <h4 className={`${poppins.className}`} style={{margin:'0 0 18px', fontWeight:'500'}}>{item.h}</h4>
-                                <p className={`${poppins.className}`} >{item.p}</p>
-                            </div>
+                            <SlideOnIntersect direction='up' delay={1} >
+
+                                <div className='TechnologyImgContainer'>
+                                    <img loading="lazy" className='TechnologyImg' src={item.img} alt="usecases" ></img>
+                                </div>
+                                <div className='TechnologyText'>
+                                    <h4 className={`${poppins.className}`} style={{margin:'0 0 18px', fontWeight:'500'}}>{item.h}</h4>
+                                    <p className={`${poppins.className}`} >{item.p}</p>
+                                </div>
+                            </SlideOnIntersect>
                         </div>
                     ))}
                 </div>
