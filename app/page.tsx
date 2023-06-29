@@ -14,17 +14,13 @@ import Support from '@/components/Support'
 import Channels from '@/components/Channels'
 import Testimonial from '@/components/Testimonial'
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+
 import { get } from 'http'
 import ConsoleLogger from '@/components/ConsoleLogger'
 
 
 
 export default async function Home() {
-
-  const session = await getServerSession(authOptions);
-  console.log('session:', session);
   
   async function getSectionData(section:string, database?:string){
 
@@ -174,8 +170,7 @@ export default async function Home() {
 
   return (
     <main className={styles.main} style={{justifyContent: 'start'}}>
-        <Splash></Splash>
-        <Header session={session}></Header>
+        
         <Banner notion={content.banner}></Banner>
         <Clients notion={content.clients}></Clients>
         <UseCases notion={content.usecases}></UseCases>
