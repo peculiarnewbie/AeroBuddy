@@ -5,6 +5,7 @@ import { poppins } from '@/app/fonts'
 
 export default function LoadingSplash(){
     const [finished, setFinished] = useState(false)
+    const [startFade, setStartFade] = useState(false)
 
 
     useEffect(() => {
@@ -16,6 +17,8 @@ export default function LoadingSplash(){
                     }
                 }, 100)
             })
+            setStartFade(true)
+            await new Promise(resolve => setTimeout(resolve, 500));
             setFinished(true)
         }
 
@@ -28,7 +31,7 @@ export default function LoadingSplash(){
             null
         ) : (
             
-            <div className={`SplashContainer ${finished ? 'finished' : ''}`}>
+            <div className={`SplashContainer ${startFade ? 'finished' : ''}`}>
                 <div className='loader'></div>
                 <h2 className={`${poppins.className} title`}>{'Aerobuddy'}</h2>
             </div>

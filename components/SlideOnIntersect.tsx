@@ -6,26 +6,6 @@ export default function SlideOnIntersect({children, direction, delay, fit} : {ch
 
     const ref = useRef<HTMLDivElement>(null);
     const inView = useOnScreen(ref);
-    
-
-    // useEffect(() => {
-    //     const observer = new IntersectionObserver(
-    //         ([entry]) => {
-    //             if(entry.isIntersecting){
-    //                 setInView(true)
-    //             }
-    //         },
-    //         {
-    //             rootMargin: '0px 0px -100px 0px'
-    //         }
-    //     )
-
-    //     observer.observe(ref.current! as Element)
-        
-    //     return () => {
-    //         observer.disconnect()
-    //     }
-    // }, [])
 
     let directionClass = `slide-in-${direction}`;
 
@@ -54,7 +34,7 @@ export function useOnScreen(ref:any) {
         }
       }
     ), [ref]);
-  
+    
     useEffect(() => {
       observer.observe(ref.current);
       return () => observer.disconnect();

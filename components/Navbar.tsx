@@ -7,13 +7,18 @@ import './styles.css'
 import { useSession, signIn, signOut } from "next-auth/react"
 import { usePathname } from 'next/navigation';
 
-export default function Navbar(){
+//@ts-ignore
+export default function Navbar({logFunction}){
     const [show, setShow] = useState(false)
     const [burgerOpened, setburgerOpened] = useState(false)
 
     const pathname = usePathname();
 
     const { data: session } = useSession()
+    
+    useEffect(() => {
+        logFunction(pathname)
+    }, [])
 
     useEffect(() => {
         const handleResize = () => {

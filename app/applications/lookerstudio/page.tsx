@@ -9,7 +9,7 @@ export default async function(){
 
     return (
     <div style={{backgroundColor:'white', height:'100vh'}}>
-        <Header session={session}></Header>
+        {/* <Header session={session}></Header> */}
         {(session ?
             <div style={{paddingTop: '93px', display: 'flex', width:'100vw', height:'100%', justifyContent:'center'}}>
                     <iframe style={{border:'0px',  width: '100vw', height:'100%',  maxWidth:'1440px'}} src="https://lookerstudio.google.com/embed/u/1/reporting/54e2fcc2-06e6-421a-8a66-c00471e8f260/page/p_hbuco6fc7c"></iframe> 

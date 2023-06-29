@@ -8,7 +8,13 @@ import HeaderShadow from './HeaderShadow'
 
 import { SessionProvider } from "next-auth/react"
 
-export default function Header({session} : {session:any}){
+//@ts-ignore
+export default function Header({session, logFunction}){
+
+    const CallLogger = async (pathname:string) => {
+        await logFunction(pathname)
+    }
+
     return (
         <header className="Header">
             <div className='Container HeaderContainer' style={{display:'flex', flexWrap:'wrap', alignItems: 'center'}}>
@@ -25,7 +31,7 @@ export default function Header({session} : {session:any}){
 
                 </div>
                 <SessionProvider session={session}>
-                    <Navbar></Navbar>
+                    <Navbar logFunction={CallLogger}></Navbar>
                 </SessionProvider>
                 
                 
