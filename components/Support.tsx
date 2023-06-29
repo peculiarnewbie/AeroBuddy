@@ -18,7 +18,7 @@ export default function Support({notion} : {notion:any}){
                     </SlideOnIntersect>
                 </div>
                 <div className={`${poppins.className} SupportText`}>
-                    <SlideOnIntersect direction='up' delay={1}>
+                    <SlideOnIntersect direction='up' delay={1} fit>
                     <h2 style={{fontSize: '34px', fontWeight: '500', marginBottom: '25px'}}>{notion[0].h}</h2>
                     <p style={{marginBottom: '40px'}}>{notion[0].p}</p>
                     </SlideOnIntersect>
