@@ -1,7 +1,7 @@
 'use client'
 import './styles.css'
 import Image from 'next/image'
-import logo from '../public/aiairport-black-transparent.png'
+import logo from '../public/Aero buddy.webp'
 
 import Navbar from './Navbar'
 import HeaderShadow from './HeaderShadow'

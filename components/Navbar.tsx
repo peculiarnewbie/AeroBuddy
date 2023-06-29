@@ -54,7 +54,7 @@ export default function Navbar(){
                     {( !session && pathname == '/' ? 
                         <>
                             <div className='Navbar-item'>
-                                <button className='Navbar-button'>Use-cases</button>
+                                <button className='Navbar-button'>Solution</button>
                             </div>
                             <div className='Navbar-item'>
                                 <button className='Navbar-button'>Technology</button>
@@ -66,7 +66,7 @@ export default function Navbar(){
                                 <button className='Navbar-button'>Support</button>
                             </div>
                             <div className='Navbar-item'>
-                                <button className='Navbar-button'>Channels</button>
+                                <button className='Navbar-button'>Use-cases</button>
                             </div>
                             <div className='Navbar-item'>
                                 <button className='Navbar-button'>Clients</button>
@@ -84,7 +84,10 @@ export default function Navbar(){
                 </div>
                 {
                     session ? (
-                            <button className={`${poppins.className} Navbar-login`} onClick={() => signOut()}>Log out</button>
+                            <button className={`${poppins.className} Navbar-login`} onClick={() => signOut()}>
+                                <p style={{ color:'inherit', fontWeight:'inherit'}}>Log out</p>
+                                {(session?.user?.image ? <img src={session.user.image} className='Navbar-login-avatar' style={{marginLeft:'5px', height: '25px', width:'25px'}} /> : null)}
+                            </button>
                         ) : (
                             <button className={`${poppins.className} Navbar-login`} onClick={() => signIn()}>Log in</button>
                         )

@@ -40,6 +40,8 @@
   --card-border-rgb: 131, 134, 135;
 
   --our-white: 251, 251, 253;
+
+  --aero-blue: #0b73b2;
 }
 
 @media (prefers-color-scheme: dark) {
