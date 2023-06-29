@@ -13,6 +13,9 @@ import Splash from '@/components/LoadingSplash'
 import Support from '@/components/Support'
 import Channels from '@/components/Channels'
 import Testimonial from '@/components/Testimonial'
+import Body from '@/components/Body'
+
+import { Suspense } from 'react'
 
 
 import { get } from 'http'
@@ -170,7 +173,6 @@ export default async function Home() {
 
   return (
     <main className={styles.main} style={{justifyContent: 'start'}}>
-        
         <Banner notion={content.banner}></Banner>
         <Clients notion={content.clients}></Clients>
         <UseCases notion={content.usecases}></UseCases>
@@ -180,7 +182,6 @@ export default async function Home() {
         <Channels notion={content.channels}></Channels>
         <Testimonial notion={content.testimonials}></Testimonial>
         {/* <ConsoleLogger data={client}></ConsoleLogger> */}
-        
         <div style={{height: '200px'}}>
         </div>
         <p>whaa</p>

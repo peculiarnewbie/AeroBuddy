@@ -91,7 +91,7 @@ export default async function RootLayout({
     <html lang="en">
       {/* <Splash></Splash> */}
       <body className={`${inter.className}`}>
-        <LoadingSplash></LoadingSplash>
+        {/* <LoadingSplash></LoadingSplash> */}
         <Header session={session} logFunction={logActivity}></Header>
         {children}
       </body>

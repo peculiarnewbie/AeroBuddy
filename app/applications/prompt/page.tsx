@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import Navbar from "@/components/Navbar";
 import Header from "@/components/header";
+import LoadingSplash from "@/components/LoadingSplash";
 
 
 export default async function(){
@@ -9,8 +10,9 @@ export default async function(){
 
     return (
     <div style={{backgroundColor:'white', height:'100vh'}}>
+        <LoadingSplash></LoadingSplash>
         {/* <Header session={session}></Header> */}
-        {(session ?
+        {(!session ?
             <div style={{paddingTop: '93px',display: 'flex', height:'100%', justifyContent:'center'}}>
                 <iframe style={{width: '100vw', height:'100%'}} src="https://aerobuddyfix-crilvken2a-uc.a.run.app/"></iframe> 
             </div>
