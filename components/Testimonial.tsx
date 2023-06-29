@@ -2,73 +2,176 @@
 
 import './styles.css'
 import './additionalstyles.css'
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 
 import { poppins } from '@/app/fonts';
 
 export default function Testimonial({notion} : {notion:any}){
 
-    const [inView, setInView] = useState(false);
-
     const [isDown, setIsDown] = useState(false);
+    const [overflowing, setOverflowing] = useState(false);
     const [startX, setStartX] = useState(0);
-    const [scrollLeft, setScrollLeft] = useState(-1440);
-    const [prevscrollLeft, setPrevScrollLeft] = useState(scrollLeft);
+    const [scrollLeft, setScrollLeft] = useState(720);
+    const [prevScrollLeft, setPrevScrollLeft] = useState(720);
     const [activeIndex, setActiveIndex] = useState(1);
+
+    const [itemSize, setItemSize] = useState(720);
+    const [itemgap, setItemGap] = useState(50);
+
+    useEffect(() => {
+        function handleResize() {
+            let size = document.querySelector('.TestimonialCarousel')?.clientWidth
+            if(size && size < 600){
+                size = size - 20
+                setItemGap(20)
+            } 
+            else if(size) {
+                size = size - 50
+                setItemGap(50)
+            }
+            setItemSize(size ? size : 720)
+            setScrollLeft(-itemSize)
+          }
+      
+          window.addEventListener('resize', handleResize);
+          handleResize()
+      
+          return () => {
+            window.removeEventListener('resize', handleResize);
+          };
+        
+    }, [])
 
     const ucItems = notion.slice(1);
 
     function handleMouseDown(e:any){
         setIsDown(true)
-        setStartX(e.pageX - scrollLeft)
-        setPrevScrollLeft(scrollLeft)
+        const parent = document.querySelector('.TestimonialCarousel') as HTMLElement;
+        const element = document.querySelector('.TestimonialItemsContainer') as HTMLElement;
+        const parentPosition = parent.getBoundingClientRect().left
+        const childPosition = element.getBoundingClientRect().left
+        let currentPosition = childPosition - parentPosition + itemSize * ucItems.length - itemgap
+        setScrollLeft(currentPosition ? currentPosition : scrollLeft)
+        setStartX(e.pageX - currentPosition)
+        setPrevScrollLeft(currentPosition)
     }
     
     function handleMouseLeave(){
+        if(!isDown) return
         setIsDown(false)
-        handleCenterItem(scrollLeft)
+        handleCenterItem()
+        // setActiveIndex(Math.round(scrollLeft / 720) + 2)
+        // handleCenterItem(scrollLeft)
     }
 
     function handleMouseUp(){ 
+        if(!isDown) return
         setIsDown(false) 
-        handleCenterItem(scrollLeft)
+        handleCenterItem()
+        // setActiveIndex(Math.round(scrollLeft / 720) + 2)
+        // handleCenterItem(scrollLeft)
     }
 
     function handleMouseMove(e:any){
         if(!isDown) return
         e.preventDefault()
-        const x = e.pageX
-        let walk = (x - startX)
-        if(walk > -1439) {
-            walk = walk - 720 * ucItems.length
-            setPrevScrollLeft(-1440 - 720 * ucItems.length)
-        }
-        else if (walk < -1441 - 720 * (ucItems.length)) {
-            walk = walk + 720 * (ucItems.length)
-            setPrevScrollLeft(-1440)
-        }
-        setScrollLeft(walk)
+        setScrollLeft(e.pageX - startX)
     }
 
-    function handleCenterItem(position:number){
-        let center = -1440 
-        if(prevscrollLeft > position) center = Math.floor(position / 720) * 720
-        else center = Math.ceil(position / 720) * 720
-        setScrollLeft(center)
-        let index = Math.abs(center / 720)
-        if(index > 1 + ucItems.length) index = index - ucItems.length - 1
-        else index = index - 1
-        setActiveIndex(index)
+    function handleCenterItem(){
+        let center = -Math.round(scrollLeft / itemSize) + 2
+        if(activeIndex == center){
+            if(scrollLeft < prevScrollLeft - 20){
+                setActiveIndex(ActiveIndexClamp(activeIndex + 1))
+            } 
+            else if(scrollLeft > prevScrollLeft + 20){
+                setActiveIndex(ActiveIndexClamp(activeIndex - 1))
+            }
+            else setScrollLeft(-itemSize * (activeIndex - 2))
+        }
+        else{
+            setActiveIndex(ActiveIndexClamp(center))
+        }
     }
 
     function handleSwitchCarousel(next:boolean){
-        console.log('switch')
-        let position
-        if(next) position = scrollLeft - 720
-        else position = scrollLeft + 720
-        if(position > -1440) {position = position - 720 * ucItems.length}
-        else if (position < -1440 - 720 * (ucItems.length)) position = position + 720 * (ucItems.length)
-        handleCenterItem(position)
+
+        if(next){
+            setActiveIndex(ActiveIndexClamp(activeIndex + 1))
+        } 
+        else{
+            setActiveIndex(ActiveIndexClamp(activeIndex - 1))
+        } 
+    }
+
+    function ActiveIndexClamp(index:number, fromOverflow?:boolean){
+        if(index > ucItems.length) {
+            if(fromOverflow) return ucItems.length
+            else {
+                setScrollLeft(scrollLeft + itemSize * ucItems.length)
+                setOverflowing(true)
+                return 0
+            }
+        }
+        else if (index < 1){
+            if(fromOverflow) return 1
+            else {
+                setScrollLeft(scrollLeft - itemSize * ucItems.length)
+                setOverflowing(true)
+                return ucItems.length + 1
+            }
+        } 
+        else return index
+    }
+    
+    useEffect(() => {
+        async function waitForAnimation(){
+            await new Promise(r => setTimeout(r, 10))
+            if(isDown) return
+            else setScrollLeft(-itemSize * (activeIndex - 2))
+        }
+
+        if(overflowing) return
+        waitForAnimation()
+    }, [activeIndex])
+
+    useEffect(() => {
+        async function handleOverflow(){
+            if(overflowing){
+                await new Promise(r => setTimeout(r, 20))
+                setActiveIndex(ActiveIndexClamp(activeIndex, true))
+                setOverflowing(false)
+            }
+        }
+        handleOverflow()
+    }, [overflowing])
+
+    useEffect(() => {
+        let interval:any
+        function AutoScroll(){
+            interval = setInterval(() => {
+                setScrollLeft(scrollLeft - itemSize)
+                handleSwitchCarousel(true)
+            }, 5000)
+        }
+        AutoScroll()
+
+        return () => clearInterval(interval)
+    }, [isDown, activeIndex, scrollLeft])
+
+    function TestimonialItem({item, key, isDummy} : {item:any, key:number, isDummy?:boolean}){
+        return(
+            <div className='TestimonialItem' style={{width:`${itemSize - itemgap}px`}} key={key}>
+                <div className='TestimonialImgContainer'>
+                    <img loading="lazy" className='TestimonialImg' src={item.img} alt="Testimonial" ></img>
+                </div>
+                <div>
+                    <h4 className={`${poppins.className}`} style={{margin:'10px 0 5px', fontWeight:'500', fontSize:'18px'}}>{item.personName}</h4>
+                    <p className={`${poppins.className}`} style={{marginBottom:'40px', fontSize:'14px'}} >{item.position}</p>
+                </div>
+                <p className={`${poppins.className}`} style={{lineHeight:'30px', fontSize:'16px'}}>{item.comment}</p>
+            </div>
+        )
     }
 
 
@@ -80,40 +183,33 @@ export default function Testimonial({notion} : {notion:any}){
                     <p className={`${poppins.className}`} style={{marginBottom:'15px'}}>{notion[0].p}</p>
                 </div>
                 <div className='TestimonialCarouselContainer'>
+                    <button className='TestimonialButton' onClick={() => handleSwitchCarousel(false)}>{"<"}</button>
                     <div className='TestimonialCarousel' onPointerDown={(e) => handleMouseDown(e)} >
-                        <div className={`TestimonialItemsContainer ${isDown ? 'dragging' : ''}`} 
-                        style={{transform: `translateX(${scrollLeft}px)`,
-                                transition: isDown ? 'none' : 'transform 0.5s ease-in-out'}}
-                        >
-                            <TestimonialItem item={ucItems[ucItems.length - 2]} key={-2} />
-                            <TestimonialItem item={ucItems[ucItems.length - 1]} key={-1} />
-                            {ucItems.map((item:any, index:number) => (
-                                <TestimonialItem item={item} key={index} />
-                            ))}
-                            <TestimonialItem item={ucItems[0]} key={ucItems.length} />
-                            <TestimonialItem item={ucItems[1]} key={ucItems.length + 1} />
+                        <div style={{overflow:'hidden', width:'100%'}}>
+                            <div style={{width:'100%', height:'100%', display:'inherit', justifyContent:'inherit', transform:`translateX(-${itemSize*3}px)`, position:'relative'}}>
+                                <div className={`TestimonialItemsContainer ${isDown ? 'dragging' : ''}`} 
+                                style={{transform: `translateX(${isDown || overflowing ? scrollLeft : -itemSize * (activeIndex-2)}px)`,
+                                transition: isDown || overflowing ? 'none' : 'transform 1s ease-in-out'}}
+                                >
+                                    <TestimonialItem item={ucItems[ucItems.length - 2]} key={-2} />
+                                    <TestimonialItem item={ucItems[ucItems.length - 1]} key={-1} />
+                                    {ucItems.map((item:any, index:number) => (
+                                        <TestimonialItem item={item} key={index} />
+                                        ))}
+                                    <TestimonialItem item={ucItems[0]} key={ucItems.length} />
+                                    <TestimonialItem item={ucItems[1]} key={ucItems.length + 1} />
+                                </div>
+                            </div>
                         </div>
+                        <p>{activeIndex}</p>
                     </div>
-                    <p>{activeIndex}</p>
-                    <button onClick={() => handleSwitchCarousel(true)}>next</button>
-                    <button onClick={() => handleSwitchCarousel(false)}>prev</button>
+                    <button className='TestimonialButton' onClick={() => handleSwitchCarousel(true)}>{">"}</button>
                 </div>
             </div>
             {/* @ts-ignore */}
             {/* <iframe width="600" height="1464" src="https://lookerstudio.google.com/embed/reporting/54e2fcc2-06e6-421a-8a66-c00471e8f260/page/OJgDD" frameborder="0" style={{border: '0'}} allowfullscreen></iframe> */}
         </section>
     )
-}
 
-function TestimonialItem({item, key, isDummy} : {item:any, key:number, isDummy?:boolean}){
-    return(
-        <div className='TestimonialItem' key={key}>
-            <div className='TestimonialImgContainer'>
-                <img loading="lazy" className='TestimonialImg' src={item.img} alt="Testimonial" ></img>
-            </div>
-            <h4 className={`${poppins.className}`} style={{margin:'0 0 18px', fontWeight:'600'}}>{item.personName}</h4>
-            <p className={`${poppins.className}`} >{item.position}</p>
-            <p className={`${poppins.className}`} >{item.comment}</p>
-        </div>
-    )
+    
 }

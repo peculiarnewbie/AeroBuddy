@@ -181,7 +181,7 @@ export default async function Home() {
         <Testimonial notion={content.testimonials}></Testimonial>
         {/* <ConsoleLogger data={client}></ConsoleLogger> */}
         
-        <div style={{height: '1000px'}}>
+        <div style={{height: '200px'}}>
         </div>
         <p>whaa</p>
     </main>
