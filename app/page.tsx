@@ -13,7 +13,6 @@ import Splash from '@/components/LoadingSplash'
 import Support from '@/components/Support'
 import Channels from '@/components/Channels'
 import Testimonial from '@/components/Testimonial'
-import Body from '@/components/Body'
 
 import { Suspense } from 'react'
 
