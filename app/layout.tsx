@@ -42,7 +42,7 @@ export default async function RootLayout({
     const body = JSON.stringify(
         {
           "parent": {
-              "database_id": "a7c1ff2dabaf4128b3e857f1276959c9"
+              "database_id": process.env.NOTION_LOG_ID
           },
           "properties":{
               "Name":{
