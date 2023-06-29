@@ -307,7 +307,7 @@
         width: 100%;
     }
 
-    .TechnologyImg{
+    .TechnologyImgContainer{
         margin-bottom: 15px;
     }
 }
@@ -390,8 +390,8 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
 }
 
 .IntegrationImg{
@@ -568,7 +568,7 @@
 }
 
 .ChannelsItem.active{
-    background-color: #006aff;
+    background-color: var(--aero-blue);
     color: white;
 }
 
@@ -628,9 +628,6 @@
 }
 
 @media screen and (min-width:992px) and (max-width: 1199px) {
-    .ChannelsItem{
-        width: 290px;
-    }
 
     .ChannelsImg{
         width: 610px;

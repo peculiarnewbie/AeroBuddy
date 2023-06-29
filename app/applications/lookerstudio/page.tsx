@@ -8,11 +8,11 @@ export default async function(){
     const session = await getServerSession(authOptions);
 
     return (
-    <div style={{backgroundColor:'white'}}>
+    <div style={{backgroundColor:'white', height:'100vh'}}>
         <Header session={session}></Header>
         {(session ?
-            <div style={{paddingTop: '93px', display: 'flex',}}>
-                <iframe style={{width: '100vw', height:'100vh'}} src="https://lookerstudio.google.com/embed/u/1/reporting/54e2fcc2-06e6-421a-8a66-c00471e8f260/page/p_hbuco6fc7c"></iframe> 
+            <div style={{paddingTop: '93px', display: 'flex', width:'100vw', height:'100%', justifyContent:'center'}}>
+                    <iframe style={{border:'0px',  width: '100vw', height:'100%',  maxWidth:'1440px'}} src="https://lookerstudio.google.com/embed/u/1/reporting/54e2fcc2-06e6-421a-8a66-c00471e8f260/page/p_hbuco6fc7c"></iframe> 
             </div>
         : <div style={{
             display: 'flex',
