@@ -2,7 +2,7 @@
 
 import './styles.css'
 import './additionalstyles.css'
-import { use, useEffect, useState } from 'react';
+import { use, useEffect, useLayoutEffect, useState } from 'react';
 
 import { poppins } from '@/app/fonts';
 
@@ -18,19 +18,24 @@ export default function Testimonial({notion} : {notion:any}){
     const [itemSize, setItemSize] = useState(720);
     const [itemgap, setItemGap] = useState(50);
 
-    useEffect(() => {
+    let resizeTimer:any;
+
+    useLayoutEffect(() => {
         function handleResize() {
-            let size = document.querySelector('.TestimonialCarousel')?.clientWidth
-            if(size && size < 600){
-                size = size - 20
-                setItemGap(20)
-            } 
-            else if(size) {
-                size = size - 50
-                setItemGap(50)
-            }
-            setItemSize(size ? size : 720)
-            setScrollLeft(-itemSize)
+            clearTimeout(resizeTimer)
+            resizeTimer = setTimeout(() => {
+                let size = document.querySelector('.TestimonialCarousel')?.clientWidth
+                if(size && size < 600){
+                    size = size - 20
+                    setItemGap(20)
+                } 
+                else if(size) {
+                    size = size - 50
+                    setItemGap(50)
+                }
+                setItemSize(size ? size : 720)
+                setScrollLeft(-itemSize)
+            }, 100)
           }
       
           window.addEventListener('resize', handleResize);
@@ -43,6 +48,9 @@ export default function Testimonial({notion} : {notion:any}){
     }, [])
 
     const ucItems = notion.slice(1);
+    let ucIndexes = [ucItems.length - 2, ucItems.length - 1]
+    for(let i = 0; i < ucItems.length; i++) ucIndexes.push(i)
+    ucIndexes.push(0, 1)
 
     function handleMouseDown(e:any){
         setIsDown(true)
@@ -161,16 +169,7 @@ export default function Testimonial({notion} : {notion:any}){
 
     function TestimonialItem({item, key, isDummy} : {item:any, key:number, isDummy?:boolean}){
         return(
-            <div className='TestimonialItem' style={{width:`${itemSize - itemgap}px`}} key={key}>
-                <div className='TestimonialImgContainer'>
-                    <img loading="lazy" className='TestimonialImg' src={item.img} alt="Testimonial" ></img>
-                </div>
-                <div>
-                    <h4 className={`${poppins.className}`} style={{margin:'10px 0 5px', fontWeight:'500', fontSize:'18px'}}>{item.personName}</h4>
-                    <p className={`${poppins.className}`} style={{marginBottom:'40px', fontSize:'14px'}} >{item.position}</p>
-                </div>
-                <p className={`${poppins.className}`} style={{lineHeight:'30px', fontSize:'16px'}}>{item.comment}</p>
-            </div>
+            <></>
         )
     }
 
@@ -189,15 +188,27 @@ export default function Testimonial({notion} : {notion:any}){
                             <div style={{width:'100%', height:'100%', display:'inherit', justifyContent:'inherit', transform:`translateX(-${itemSize*3}px)`, position:'relative'}}>
                                 <div className={`TestimonialItemsContainer ${isDown ? 'dragging' : ''}`} 
                                 style={{transform: `translateX(${isDown || overflowing ? scrollLeft : -itemSize * (activeIndex-2)}px)`,
-                                transition: isDown || overflowing ? 'none' : 'transform 1s ease-in-out'}}
+                                transition:  `transform ${isDown || overflowing ? '0' : '1'}s ease-in-out`}}
                                 >
-                                    <TestimonialItem item={ucItems[ucItems.length - 2]} key={-2} />
-                                    <TestimonialItem item={ucItems[ucItems.length - 1]} key={-1} />
-                                    {ucItems.map((item:any, index:number) => (
-                                        <TestimonialItem item={item} key={index} />
-                                        ))}
-                                    <TestimonialItem item={ucItems[0]} key={ucItems.length} />
-                                    <TestimonialItem item={ucItems[1]} key={ucItems.length + 1} />
+                                    {ucIndexes.map((item, index) => {
+                                        return(
+                                            <div className='TestimonialItem' style={{width:`${itemSize - itemgap}px`}} key={index}>
+                                                <div className='TestimonialImgContainer'>
+                                                    <img loading="lazy" className='TestimonialImg' src={ucItems[item].img} alt="Testimonial" ></img>
+                                                </div>
+                                                <div>
+                                                    <h4 className={`${poppins.className}`} style={{margin:'10px 0 5px', fontWeight:'500', fontSize:'18px'}}>{ucItems[item].personName}</h4>
+                                                    <p className={`${poppins.className}`} style={{marginBottom:'40px', fontSize:'14px'}} >{ucItems[item].position}</p>
+                                                </div>
+                                                <p className={`${poppins.className}`} style={{lineHeight:'30px', fontSize:'16px'}}>{ucItems[item].comment}</p>
+                                            </div>
+                                        )
+                                    })}
+                                    {/* // <TestimonialItem item={ucItems[ucItems.length - 2]} key={-2} />
+                                    // <TestimonialItem item={ucItems[ucItems.length - 1]} key={-1} />
+                                    
+                                    // <TestimonialItem item={ucItems[0]} key={ucItems.length} />
+                                    // <TestimonialItem item={ucItems[1]} key={ucItems.length + 1} /> */}
                                 </div>
                             </div>
                         </div>
