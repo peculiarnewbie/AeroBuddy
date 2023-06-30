@@ -783,9 +783,30 @@
 }
 
 .HomeFooter{
+    display: flex;
+    justify-content: center;
+    color: black;
     background-color: #eff2f9;
     height: 74px;
     width: 100vw;
+    border-top: 1px solid #a5a5a5;
+}
+
+.Home-Footer-Container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.FooterButton{
+    color: #7e7e7e;
+    border-bottom: 1px solid rgba(0,11,40, 0);
+    cursor: pointer;
+}
+
+.FooterButton:hover{
+    border-bottom: 1px solid #7e7e7e;
 }
 
 @media screen and (max-width: 599px) {
