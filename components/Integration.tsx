@@ -10,7 +10,7 @@ export default function Integration({notion} : {notion:any}){
     const ucItems = notion.slice(1);
 
     return(
-        <section className='Integration'>
+        <section className='Integration' id='Integration'>
             <div className="Container" style={{height: '100%', color: 'black'}}>
                 <SlideOnIntersect direction='up' delay={1}>
                     <div style={{marginBottom:'70px'}}>

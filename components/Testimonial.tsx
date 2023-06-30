@@ -175,7 +175,7 @@ export default function Testimonial({notion} : {notion:any}){
 
 
     return(
-        <section className='Testimonial' onPointerMove={(e) => handleMouseMove(e)} onPointerUp={handleMouseUp} onPointerLeave={handleMouseLeave}  >
+        <section className='Testimonial' id='Testimonial' onPointerMove={(e) => handleMouseMove(e)} onPointerUp={handleMouseUp} onPointerLeave={handleMouseLeave}  >
             <div className="Container" style={{height: '100%', color: 'black'}}>
                 <div style={{marginBottom:'70px'}}>
                     <h3 className={`${poppins.className}`} style={{marginBottom:'8px'}}>{notion[0].h}</h3>

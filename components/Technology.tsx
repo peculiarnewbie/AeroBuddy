@@ -14,7 +14,7 @@ export default function Technology({notion} : {notion:any}){
     const ucItems = notion.slice(1);
 
     return(
-        <section className='Technology'>
+        <section className='Technology' id='Technology'>
             <div className="Container" style={{height: '100%', color: 'black'}}>
                 <div style={{marginBottom:'70px'}}>
                     <SlideOnIntersect direction='up' delay={1}>
