@@ -9,7 +9,7 @@ export default function Support({notion} : {notion:any}){
     const ucItems = notion.slice(1);
 
     return(
-        <section className="Support">
+        <section className="Support" id="Support">
             <div className="Container SupportContainer">
                 <div className="SupportImgContainer">
                     <SlideOnIntersect direction='up' delay={1}>

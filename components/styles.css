@@ -383,9 +383,18 @@
     max-height: 100%;
 }
 
+.ContentDoubleButton{
+    display: flex;
+    flex-direction: row;
+}
+
 @media screen and (max-width: 600px) {
     .Content1H2{
         font-size: 30px;
+    }
+
+    .ContentDoubleButton{
+        flex-direction: column;
     }
 }
 
@@ -424,7 +433,7 @@
 
     .Content1Button{
         align-self: center;
-        width: 150px;
+        width: 170px;
     }
     
 }

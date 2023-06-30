@@ -14,7 +14,7 @@ export default function UseCases({notion} : {notion:any}){
     const ucItems = notion.slice(1);
 
     return(
-        <section className='UseCases'>
+        <section className='UseCases' id='UseCases'>
             <div className="Container" style={{height: '100%', color: 'black'}}>
                 <div style={{marginBottom:'70px'}}>
                     <SlideOnIntersect direction='up' delay={1}>

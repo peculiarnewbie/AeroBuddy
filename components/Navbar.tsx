@@ -7,6 +7,8 @@ import './styles.css'
 import { useSession, signIn, signOut } from "next-auth/react"
 import { usePathname } from 'next/navigation';
 
+import Link from 'next/link';
+
 //@ts-ignore
 export default function Navbar({logFunction}){
     const [show, setShow] = useState(false)
@@ -59,22 +61,22 @@ export default function Navbar({logFunction}){
                     {( !session && pathname == '/' ? 
                         <>
                             <div className='Navbar-item'>
-                                <button className='Navbar-button'>Solution</button>
+                                <Link href='#UseCases' className='Navbar-button'>Solution</Link>
                             </div>
                             <div className='Navbar-item'>
-                                <button className='Navbar-button'>Technology</button>
+                                <Link href='#Technology' className='Navbar-button'>Technology</Link>
                             </div>
                             <div className='Navbar-item'>
-                                <button className='Navbar-button'>Integration</button>
+                                <Link href='#Integration' className='Navbar-button'>Integration</Link>
                             </div>
                             <div className='Navbar-item'>
-                                <button className='Navbar-button'>Support</button>
+                                <Link href='#Support' className='Navbar-button'>Support</Link>
                             </div>
                             <div className='Navbar-item'>
-                                <button className='Navbar-button'>Use-cases</button>
+                                <Link href='#Channels' className='Navbar-button'>Use-cases</Link>
                             </div>
                             <div className='Navbar-item'>
-                                <button className='Navbar-button'>Clients</button>
+                                <Link href='#Testimonial' className='Navbar-button'>Clients</Link>
                             </div>
                         
                         </> : <>

@@ -63,7 +63,7 @@ export default function Channels({notion} : {notion:any}){
     }
 
     return(
-        <section className='Channels'>
+        <section className='Channels' id='Channels'>
             <div className="Container" style={{height: '100%', color: 'black'}}>
                 <div style={{marginBottom:'70px'}}>
                     <SlideOnIntersect direction='up' delay={1}>
