@@ -235,9 +235,7 @@
 
 @media screen and (min-width:1200px) and (max-width: 1550px) {
     .UseCasesItem{
-        height: 224px;
         margin: 0 0 30px;
-        padding: 0;
     }
 }
 
@@ -783,3 +781,23 @@
 
 @media screen and (min-width:1200px) and (max-width: 1550px) {
 }
+
+.HomeFooter{
+    background-color: #eff2f9;
+    height: 74px;
+    width: 100vw;
+}
+
+@media screen and (max-width: 599px) {
+    .HomeFooter{
+        height: 125px;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 991px) {
+    .HomeFooter{
+        height: 105px;
+    }
+}
+
+

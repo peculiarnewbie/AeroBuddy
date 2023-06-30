@@ -1,3 +1,4 @@
+
 import Image from 'next/image'
 import styles from './page.module.css'
 import Header from '@/components/header'
@@ -13,6 +14,7 @@ import Splash from '@/components/LoadingSplash'
 import Support from '@/components/Support'
 import Channels from '@/components/Channels'
 import Testimonial from '@/components/Testimonial'
+import HomeFooter from '@/components/HomeFooter'
 
 import { Suspense } from 'react'
 
@@ -23,6 +25,7 @@ import ConsoleLogger from '@/components/ConsoleLogger'
 
 
 export default async function Home() {
+  
   
   async function getSectionData(section:string, database?:string){
 
@@ -180,10 +183,8 @@ export default async function Home() {
         <Support notion={content.support}></Support>
         <Channels notion={content.channels}></Channels>
         <Testimonial notion={content.testimonials}></Testimonial>
+        <HomeFooter></HomeFooter>
         {/* <ConsoleLogger data={client}></ConsoleLogger> */}
-        <div style={{height: '200px'}}>
-        </div>
-        <p>whaa</p>
     </main>
   )
 }
