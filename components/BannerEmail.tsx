@@ -6,29 +6,32 @@ import './entry.css'
 import { poppins } from '@/app/fonts'
 import * as Form from '@radix-ui/react-form';
 import { signIn, signOut } from "next-auth/react"
+import SlideOnIntersect from './SlideOnIntersect'
 
-export default function BannerEmail({loading}:{loading:boolean}){
+export default function BannerEmail({session}:{session:any}){
+    
     return(
-        // <Form.Root className="FormRoot" style={{display:'flex', flexDirection: 'column'}}>
-        //     <Form.Field className="Content1EmailContainer" name="email">
-        //         {/* <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', color: 'black' }}>
-        //             <Form.Label className="FormLabel">Email</Form.Label>
-        //             <Form.Message className="FormMessage" match="valueMissing">
-        //             Please enter your email
-        //             </Form.Message>
-        //             <Form.Message className="FormMessage" match="typeMismatch">
-        //             Please provide a valid email
-        //             </Form.Message>
-        //         </div> */}
-        //         <Form.Control asChild>
-        //             <input className={`Content1Email ${loading ? '' : 'slide-in-left animation-delay-2'}`} type="email" placeholder='E-mail' required />
-        //         </Form.Control>
-        //     </Form.Field>
-        //     <Form.Submit asChild>
-                <button className={`${poppins.className} Content1Button ${loading ? '' : 'slide-in-left animation-delay-3'}`} onClick={() => signIn()}>
+        <>
+        {(!session ?
+            <SlideOnIntersect direction='left' delay={2}>
+                <button className={`${poppins.className} Content1Button`} onClick={() => signIn()}>
                     Try now
-                </button>
-        //     </Form.Submit>
-        // </Form.Root>
+                </button> 
+            </SlideOnIntersect> :
+                <div className='ContentDoubleButton' style={{display:'flex', gap:'20px'}}>
+                    <SlideOnIntersect direction='left' delay={3} fit>
+                        <a className={`${poppins.className} Content1Button`} href='/applications/lookerstudio'>
+                            Try Looker App
+                        </a>
+                    </SlideOnIntersect>
+                    <SlideOnIntersect direction='left' delay={2} fit>
+                        <a className={`${poppins.className} Content1Button`} href='/applications/prompt'>
+                            Try Prompt App
+                        </a>
+                    </SlideOnIntersect>
+                </div>
+        )}
+        </>
+        
     )
 }
