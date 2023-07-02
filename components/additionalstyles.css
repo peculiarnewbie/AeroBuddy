@@ -32,6 +32,7 @@
 .title{
     margin-top: 50px;
     font-size: 50px;
+    color: #0b73b2;
 }
 
 @media screen and (max-width:600px) {
@@ -45,7 +46,7 @@
     height: 150px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: black;
+    border-top-color: #0b73b2;
     -webkit-animation: spin 1s ease-in-out -0.1s infinite;
     animation: spin 1s ease-in-out -0.1s infinite;
 }
@@ -58,7 +59,7 @@
     bottom: 5px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: black;
+    border-top-color: #0b73b2;
     -webkit-animation: spin 1.5s ease-in-out infinite;
     animation: spin 1.5s ease-in-out infinite;
 }
@@ -71,7 +72,7 @@
     bottom: 15px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: black;
+    border-top-color: #0b73b2;
     -webkit-animation: spin 3s linear infinite;
     animation: spin 3s linear infinite;
 }
