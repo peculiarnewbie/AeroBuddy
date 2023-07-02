@@ -180,7 +180,7 @@ export default async function Home() {
         <UseCases notion={content.usecases}></UseCases>
         <Technology notion={content.technology}></Technology>
         <Integration notion={content.integration}></Integration>
-        <Support notion={content.support}></Support>
+        {/* <Support notion={content.support}></Support> */}
         <Channels notion={content.channels}></Channels>
         <Testimonial notion={content.testimonials}></Testimonial>
         <HomeFooter></HomeFooter>
