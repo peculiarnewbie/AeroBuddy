@@ -69,9 +69,6 @@ export default function Navbar({logFunction}){
                             <div className='Navbar-item'>
                                 <Link href='#Integration' className='Navbar-button'>Integration</Link>
                             </div>
-                            {/* <div className='Navbar-item'>
-                                <Link href='#Support' className='Navbar-button'>Support</Link>
-                            </div> */}
                             <div className='Navbar-item'>
                                 <Link href='#Channels' className='Navbar-button'>Use-cases</Link>
                             </div>
