@@ -78,7 +78,7 @@ export default function Navbar({logFunction}){
                         
                         </> : <>
                             <div className='Navbar-item'>
-                                <a className='Navbar-button' href='/applications/lookerstudio'>Looker Studio</a>
+                                <a className='Navbar-button' href='/applications/analytics'>Dashboard Analytics</a>
                             </div>
                             <div className='Navbar-item'>
                                 <a className='Navbar-button' href='/applications/prompt'>Prompt app</a>

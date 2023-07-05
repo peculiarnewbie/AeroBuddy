@@ -20,8 +20,8 @@ export default function BannerEmail({session}:{session:any}){
             </SlideOnIntersect> :
                 <div className='ContentDoubleButton' style={{display:'flex', gap:'20px'}}>
                     <SlideOnIntersect direction='left' delay={3} fit>
-                        <a className={`${poppins.className} Content1Button`} href='/applications/lookerstudio'>
-                            Try Looker App
+                        <a className={`${poppins.className} Content1Button`} href='/applications/analytics'>
+                            Try Analytics App
                         </a>
                     </SlideOnIntersect>
                     <SlideOnIntersect direction='left' delay={2} fit>
