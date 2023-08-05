@@ -4,6 +4,8 @@ import Navbar from "@/components/Navbar";
 import Header from "@/components/header";
 import LoadingSplash from "@/components/LoadingSplash";
 
+export const dynamic = "force-dynamic";
+
 export default async function () {
   const session = await getServerSession(authOptions);
 
@@ -52,6 +54,8 @@ export default async function () {
 
   const prompturi =
     promptLink.results[0]?.properties.Text.rich_text[0]?.plain_text;
+
+  console.log("prompturi", prompturi);
 
   return (
     <div style={{ backgroundColor: "white", height: "100vh" }}>
