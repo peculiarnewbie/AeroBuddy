@@ -8,6 +8,8 @@ import HeaderShadow from './HeaderShadow'
 
 import { SessionProvider } from "next-auth/react"
 
+import Script from 'next/script'
+
 //@ts-ignore
 export default function Header({session, logFunction}){
 
@@ -36,7 +38,17 @@ export default function Header({session, logFunction}){
                 
                 
             </div>
-                <HeaderShadow></HeaderShadow>
+            <HeaderShadow></HeaderShadow>
+            <Script src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID" />
+            <Script id="google-analytics">
+                {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+        
+                gtag('config', 'GA_MEASUREMENT_ID');
+                `}
+            </Script>
         </header>
     )
 }
