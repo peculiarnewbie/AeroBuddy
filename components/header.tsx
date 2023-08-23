@@ -39,16 +39,21 @@ export default function Header({session, logFunction}){
                 
             </div>
             <HeaderShadow></HeaderShadow>
-            <Script src="https://www.googletagmanager.com/gtag/js?id=G-MYHH0KQ0PG" />
-            <Script id="google-analytics">
-                {`
+            <script
+                src={`https://www.googletagmanager.com/gtag/js?id=G-MYHH0KQ0PG`}
+            />
+            <script
+            dangerouslySetInnerHTML={{
+                __html: `
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-        
-                gtag('config', 'G-MYHH0KQ0PG');
-                `}
-            </Script>
+                gtag('config', 'G-MYHH0KQ0PG', {
+                    page_path: window.location.pathname,
+                });
+                `,
+            }}
+            />
         </header>
     )
 }
