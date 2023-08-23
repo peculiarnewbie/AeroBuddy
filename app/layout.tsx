@@ -4,6 +4,7 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -82,8 +83,6 @@ export default async function RootLayout({
 
     const response = await raw.json()
 
-    console.log('logged', response);
-
     return response;
   }
 
@@ -95,6 +94,19 @@ export default async function RootLayout({
         <Header session={session} logFunction={logActivity}></Header>
         {children}
       </body>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=G-MYHH0KQ0PG`}
+        />
+        <Script id='ga-analytics'>
+          {
+            `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-MYHH0KQ0PG');
+            `
+          }
+        </Script>
     </html>
   )
 }
