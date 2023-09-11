@@ -45,8 +45,6 @@ export default async function () {
 
     const response = await raw.json();
 
-    console.log("fetched", "url");
-
     return response;
   }
 
@@ -54,8 +52,6 @@ export default async function () {
 
   const prompturi =
     promptLink.results[0]?.properties.Text.rich_text[0]?.plain_text;
-
-  console.log("prompturi", prompturi);
 
   return (
     <div style={{ backgroundColor: "white", height: "100vh" }}>

@@ -64,8 +64,6 @@ export default async function Home() {
 
     const response = await raw.json()
 
-    console.log('fetched', section);
-
     return response;
   }
 

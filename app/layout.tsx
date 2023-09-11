@@ -19,7 +19,6 @@ export default async function RootLayout({
 }) {
 
   const session = await getServerSession(authOptions);
-  console.log('session:', session);
 
   const logActivity = async (pathname:string) => {
     'use server';
@@ -63,8 +62,6 @@ export default async function RootLayout({
           }
       }
     )
-
-    console.log(body)
 
     const options = {
       method: 'POST',
