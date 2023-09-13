@@ -41,10 +41,9 @@ export async function getUserData(
 		options
 	);
 
-	if (res.status != 200) return { user: null };
-
 	const json = await res.json();
 	const result = json.results[0];
+	if (!result) return { user: null };
 	console.log("res: ", res, "body: ", json, "properties: ", result.properties);
 
 	const user = {

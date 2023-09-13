@@ -128,7 +128,7 @@ export default function Navbar({ logFunction }) {
 				) : (
 					<button
 						className={`${poppins.className} Navbar-login`}
-						onClick={() => signIn("google")}
+						onClick={() => signIn("google", { callbackUrl: "/aftersignin" })}
 					>
 						Log in
 					</button>

@@ -9,9 +9,9 @@ export const dynamic = "force-dynamic";
 export default async function () {
 	const session = await getServerSession(authOptions);
 
-	const userPromise = await getUserData(session?.user?.email);
+	const userResponse = await getUserData(session?.user?.email);
 	let user: userOnClient;
-	if (userPromise.user) user = userPromise.user;
+	if (userResponse.user) user = userResponse.user;
 	else user = { id: "", name: "", email: "", isApproved: false };
 
 	async function getPromptLink() {

@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { logActivity } from "@/lib/logActivity";
 import { defaultNotionHeaders, type userOnClient } from "@/lib/notionHelper";
 import { getUserData } from "@/lib/notionHelper";
+import Link from "next/link";
 
 export default async function () {
 	const session = await getServerSession(authOptions);
@@ -109,13 +110,32 @@ export default async function () {
 	}
 
 	return (
-		<div>
-			<div style={{ height: "300px" }}></div>
-			<div>
-				signed in as:
-				{session?.user?.name}
-			</div>
-			<ConsoleLogger data={currentUser}></ConsoleLogger>
+		// <div>
+		// 	<div style={{ height: "300px" }}></div>
+		// 	<div>
+		// 		signed in as:
+		// 		{session?.user?.name}
+		// 	</div>
+		// </div>
+
+		<div
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "center",
+				alignItems: "center",
+				height: "100vh",
+				gap: "12px",
+				backgroundColor: "white",
+			}}
+		>
+			<h1 style={{ color: "black" }}>Thank you for Signing up!</h1>
+			<p style={{ color: "black" }}>
+				we will notify you via your email when we've approved your account
+			</p>
+			<Link href="/" className="Navbar-button">
+				Go to Home
+			</Link>
 		</div>
 	);
 }
