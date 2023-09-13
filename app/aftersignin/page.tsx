@@ -131,7 +131,7 @@ export default async function () {
 		>
 			<h1 style={{ color: "black" }}>Thank you for Signing up!</h1>
 			<p style={{ color: "black" }}>
-				we will notify you via your email when we've approved your account
+				{"we will notify you via your email when we've approved your account"}
 			</p>
 			<Link href="/" className="Navbar-button">
 				Go to Home
