@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-export default function ConsoleLogger({data}:{data:any}){
-    console.log(data);
-    return null
+export default function ConsoleLogger({ data }: { data: any }) {
+	console.log(data);
+	return null;
 }

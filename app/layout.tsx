@@ -4,6 +4,8 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { getUserData, type userOnClient } from "@/lib/notionHelper";
+import { logActivity } from "@/lib/logActivity";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,64 +21,26 @@ export default async function RootLayout({
 }) {
 	const session = await getServerSession(authOptions);
 
-	const logActivity = async (pathname: string) => {
+	const userResponse = await getUserData(session?.user?.email);
+	let user: userOnClient;
+	if (userResponse.user) user = userResponse.user;
+	else user = { id: "", name: "", email: "", isApproved: false };
+
+	const logActivityLayout = async (pathname: string) => {
 		"use server";
 
-		if (!session) {
-			return;
-		}
-
-		let page = "";
+		let activity = "";
 		if (pathname == "/") {
-			page = "Home";
+			activity = "Home";
 		} else if (pathname == "/applications/lookerstudio") {
-			page = "Looker Studio";
+			activity = "Looker Studio";
 		} else if (pathname == "/applications/prompt") {
-			page = "Prompt";
+			activity = "Prompt";
 		}
-
-		const body = JSON.stringify({
-			parent: {
-				database_id: process.env.NOTION_LOG_ID,
-			},
-			properties: {
-				Name: {
-					title: [
-						{
-							text: {
-								content: session?.user?.name,
-							},
-						},
-					],
-				},
-				Email: {
-					email: session?.user?.email,
-				},
-				Page: {
-					select: {
-						name: page,
-					},
-				},
-			},
-		});
-
-		const options = {
-			method: "POST",
-			headers: {
-				"Notion-Version": "2022-06-28",
-				"content-type": "application/json",
-				Authorization: `Bearer ${process.env.NOTION_KEY}`,
-			},
-			cache: "no-cache",
-			body: body,
-		};
-
-		//@ts-ignore
-		const raw = await fetch(`https://api.notion.com/v1/pages`, options);
-
-		const response = await raw.json();
-
-		return response;
+		if (user.id) {
+			console.log("userid: ", user.id);
+			await logActivity({ user: user, activity });
+		}
 	};
 
 	return (
@@ -84,7 +48,7 @@ export default async function RootLayout({
 			{/* <Splash></Splash> */}
 			<body className={`${inter.className}`}>
 				{/* <LoadingSplash></LoadingSplash> */}
-				<Header session={session} logFunction={logActivity}></Header>
+				<Header session={session} logFunction={logActivityLayout}></Header>
 				{children}
 			</body>
 		</html>
