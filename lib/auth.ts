@@ -1,7 +1,7 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import GithubProvider from "next-auth/providers/github"
+import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {
@@ -25,12 +25,21 @@ export const authOptions: NextAuthOptions = {
     //   },
     // }),
     GoogleProvider({
-        clientId: process.env.GOOGLE_ID || "",
-        clientSecret: process.env.GOOGLE_SECRET || "",
+      clientId: process.env.GOOGLE_ID || "",
+      clientSecret: process.env.GOOGLE_SECRET || "",
     }),
     GithubProvider({
       clientId: process.env.GITHUB_ID || "",
       clientSecret: process.env.GITHUB_SECRET || "",
     }),
   ],
+  // callbacks: {
+  //   async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
+  //     // Allows relative callback URLs
+  //     if (url.startsWith("/")) return `${baseUrl}${url}`;
+  //     // Allows callback URLs on the same origin
+  //     else if (new URL(url).origin === baseUrl) return url;
+  //     return baseUrl;
+  //   },
+  // },
 };
