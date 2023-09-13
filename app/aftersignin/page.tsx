@@ -98,7 +98,7 @@ export default async function () {
 				isApproved: user.isApproved,
 			};
 
-			console.log("user exists", user);
+			console.log("user exists", user, "properties: ");
 
 			await logActivity({ user: currentUser, activity: "signed in" });
 			redirect("/");

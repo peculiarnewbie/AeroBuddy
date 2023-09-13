@@ -14,10 +14,10 @@ export type userOnClient = {
 
 export async function getUserData(
 	email: string | null | undefined
-): Promise<{ status: number; user?: userOnClient }> {
+): Promise<{ user?: userOnClient | null }> {
 	"use server";
 
-	if (!email) return { status: 500 };
+	if (!email) return { user: null };
 
 	const body = JSON.stringify({
 		filter: {
@@ -41,16 +41,18 @@ export async function getUserData(
 		options
 	);
 
-	if (res.status != 200) return { status: res.status };
+	if (res.status != 200) return { user: null };
 
 	const json = await res.json();
+	const result = json.results[0];
+	console.log("res: ", res, "body: ", json, "properties: ", result.properties);
 
 	const user = {
-		id: json.id,
-		name: json.properties.Name.title[0].rich_text,
-		email: json.properties.Email.email,
-		isApproved: json.properties.Approved.checkbox,
+		id: result.id,
+		name: result.properties.Name.title[0].rich_text,
+		email: result.properties.Email.email,
+		isApproved: result.properties.Approved.checkbox,
 	};
 
-	return { status: 200, user };
+	return { user };
 }
