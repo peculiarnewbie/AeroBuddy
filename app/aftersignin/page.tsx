@@ -101,7 +101,7 @@ export default async function () {
 
 			console.log("user exists", user, "properties: ");
 
-			await logActivity({ user: currentUser, activity: "signed in" });
+			await logActivity({ user: currentUser, activity: "Signed in" });
 			redirect("/");
 		}
 	} else {
