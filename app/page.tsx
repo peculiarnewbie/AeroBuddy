@@ -103,8 +103,6 @@ export default async function Home() {
 	const testimonialsData = await getContent(true);
 	const testimonials = getTestimonial(testimonialsData.results);
 
-	console.log("No redeploy function in amplify lmao");
-
 	return (
 		<main className={styles.main} style={{ justifyContent: "start" }}>
 			<Banner notion={banner}></Banner>
