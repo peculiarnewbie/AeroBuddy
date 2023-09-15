@@ -11,6 +11,7 @@ import HomeFooter from "@/components/HomeFooter";
 
 import { Suspense } from "react";
 import ConsoleLogger from "@/components/ConsoleLogger";
+import Head from "next/head";
 
 export default async function Home() {
 	async function getContent(database?: boolean) {
@@ -104,19 +105,24 @@ export default async function Home() {
 	const testimonials = getTestimonial(testimonialsData.results);
 
 	return (
-		<main className={styles.main} style={{ justifyContent: "start" }}>
-			<Banner notion={banner}></Banner>
-			<Clients notion={clients}></Clients>
-			<UseCases notion={useCases}></UseCases>
-			<Technology notion={technology}></Technology>
-			<Integration notion={integration}></Integration>
-			<Channels notion={channels}></Channels>
-			<Testimonial
-				heading={testimonialHeading[0]}
-				items={testimonials}
-			></Testimonial>
-			<HomeFooter></HomeFooter>
-			{/* <ConsoleLogger data={testimonials}></ConsoleLogger> */}
-		</main>
+		<>
+			<Head>
+				<meta name="viewport" content="viewport-fit=cover" />
+			</Head>
+			<main className={styles.main} style={{ justifyContent: "start" }}>
+				<Banner notion={banner}></Banner>
+				<Clients notion={clients}></Clients>
+				<UseCases notion={useCases}></UseCases>
+				<Technology notion={technology}></Technology>
+				<Integration notion={integration}></Integration>
+				<Channels notion={channels}></Channels>
+				<Testimonial
+					heading={testimonialHeading[0]}
+					items={testimonials}
+				></Testimonial>
+				<HomeFooter></HomeFooter>
+				{/* <ConsoleLogger data={testimonials}></ConsoleLogger> */}
+			</main>
+		</>
 	);
 }
