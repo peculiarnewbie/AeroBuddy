@@ -1,24 +1,15 @@
-import Image from "next/image";
 import styles from "./page.module.css";
-import Header from "@/components/header";
 import Banner from "@/components/Banner";
 import { defaultNotionHeaders, type mainTextObject } from "@/lib/notionHelper";
-import { Client } from "@notionhq/client";
-import { Content } from "next/font/google";
-import { equal } from "assert";
 import Clients from "@/components/Clients";
 import UseCases from "@/components/UseCases";
 import Technology from "@/components/Technology";
 import Integration from "@/components/Integration";
-import Splash from "@/components/LoadingSplash";
-import Support from "@/components/Support";
 import Channels from "@/components/Channels";
 import Testimonial from "@/components/Testimonial";
 import HomeFooter from "@/components/HomeFooter";
 
 import { Suspense } from "react";
-
-import { get } from "http";
 import ConsoleLogger from "@/components/ConsoleLogger";
 
 export default async function Home() {
@@ -52,7 +43,6 @@ export default async function Home() {
 			body: body,
 		};
 
-		//@ts-ignore
 		const raw = await fetch(
 			`https://api.notion.com/v1/databases/${
 				database

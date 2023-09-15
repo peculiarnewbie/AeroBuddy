@@ -49,7 +49,7 @@ export default function UseCases({ notion }: { notion: any }) {
 								>
 									{item.Text}
 								</h4>
-								<p className={`${poppins.className}`}>{item.p}</p>
+								<p className={`${poppins.className}`}>{item.altText}</p>
 							</SlideOnIntersect>
 						</div>
 					))}
