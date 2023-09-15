@@ -106,9 +106,6 @@ export default async function Home() {
 
 	return (
 		<>
-			<Head>
-				<meta name="viewport" content="viewport-fit=cover" />
-			</Head>
 			<main className={styles.main} style={{ justifyContent: "start" }}>
 				<Banner notion={banner}></Banner>
 				<Clients notion={clients}></Clients>

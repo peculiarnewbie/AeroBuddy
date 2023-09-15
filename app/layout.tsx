@@ -45,6 +45,9 @@ export default async function RootLayout({
 
 	return (
 		<html lang="en">
+			<head>
+				<meta name="viewport" content="viewport-fit=cover" />
+			</head>
 			{/* <Splash></Splash> */}
 			<body className={`${inter.className}`}>
 				{/* <LoadingSplash></LoadingSplash> */}
