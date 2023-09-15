@@ -16,7 +16,7 @@ export default function Support({ notion }: { notion: any }) {
 						<img
 							loading="lazy"
 							className="SupportImg"
-							src={notion[0].img}
+							src={notion[0].URL}
 							alt="support"
 						></img>
 					</SlideOnIntersect>
@@ -30,15 +30,15 @@ export default function Support({ notion }: { notion: any }) {
 								marginBottom: "25px",
 							}}
 						>
-							{notion[0].h}
+							{notion[0].Text}
 						</h2>
-						<p style={{ marginBottom: "40px" }}>{notion[0].p}</p>
+						<p style={{ marginBottom: "40px" }}>{notion[0].altText}</p>
 					</SlideOnIntersect>
 					<ul className="SupportItemsContainer">
 						{ucItems.map((item: any, index: number) => (
 							<SlideOnIntersect direction="up" delay={1} fit key={index}>
 								<li className="SupportItems">
-									<p>{item.h}</p>
+									<p>{item.Text}</p>
 								</li>
 							</SlideOnIntersect>
 						))}

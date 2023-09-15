@@ -17,13 +17,13 @@ export default function Integration({ notion }: { notion: any }) {
 							className={`${poppins.className}`}
 							style={{ fontWeight: "300", fontSize: "34" }}
 						>
-							{notion[0].h}
+							{notion[0].Text}
 						</h3>
 						<h3
 							className={`${poppins.className}`}
 							style={{ marginBottom: "15px", fontSize: "34" }}
 						>
-							{notion[0].p}
+							{notion[0].altText}
 						</h3>
 					</div>
 				</SlideOnIntersect>
@@ -35,7 +35,7 @@ export default function Integration({ notion }: { notion: any }) {
 									<img
 										loading="lazy"
 										className="IntegrationImg"
-										src={item.img}
+										src={item.URL}
 										alt="usecases"
 									></img>
 								</div>
@@ -44,7 +44,7 @@ export default function Integration({ notion }: { notion: any }) {
 										className={`${poppins.className}`}
 										style={{ fontSize: "24px", fontWeight: "500" }}
 									>
-										{item.h}
+										{item.Text}
 									</h4>
 								</div>
 							</SlideOnIntersect>

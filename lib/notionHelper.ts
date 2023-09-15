@@ -12,6 +12,13 @@ export type userOnClient = {
 	isApproved: boolean;
 };
 
+export type mainTextObject = {
+	index: number;
+	Text: string;
+	altText: string;
+	URL: string;
+};
+
 export async function getUserData(
 	email: string | null | undefined
 ): Promise<{ user?: userOnClient | null }> {

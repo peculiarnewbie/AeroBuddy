@@ -30,7 +30,7 @@ export default function Channels({ notion }: { notion: any }) {
 			//@ts-ignore
 			ucItems.forEach((item) => {
 				var image = new Image();
-				image.src = item.img;
+				image.src = item.URL;
 				if (image.complete) newLoaded[i] = true;
 				else {
 					allLoaded = false;
@@ -69,13 +69,13 @@ export default function Channels({ notion }: { notion: any }) {
 							className={`${poppins.className}`}
 							style={{ marginBottom: "8px" }}
 						>
-							{notion[0].h}
+							{notion[0].Text}
 						</h3>
 						<p
 							className={`${poppins.className}`}
 							style={{ marginBottom: "15px" }}
 						>
-							{notion[0].p}
+							{notion[0].altText}
 						</p>
 					</SlideOnIntersect>
 				</div>
@@ -105,7 +105,7 @@ export default function Channels({ notion }: { notion: any }) {
 											fontSize: "17px",
 										}}
 									>
-										{item.h}
+										{item.Text}
 									</h4>
 									<p
 										className={`${poppins.className}`}
@@ -115,7 +115,7 @@ export default function Channels({ notion }: { notion: any }) {
 											fontSize: "15px",
 										}}
 									>
-										{item.p}
+										{item.altText}
 									</p>
 								</Tabs.Trigger>
 							</SlideOnIntersect>
@@ -135,7 +135,7 @@ export default function Channels({ notion }: { notion: any }) {
 							<img
 								loading="lazy"
 								className={`ChannelsImg ${imgLoaded[index] ? "loaded" : ""}`}
-								src={item.img}
+								src={item.URL}
 								alt="Channels"
 							></img>
 						</div>

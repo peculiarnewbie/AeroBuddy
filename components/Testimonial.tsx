@@ -3,10 +3,17 @@
 import "./styles.css";
 import "./additionalstyles.css";
 import { use, useEffect, useLayoutEffect, useState } from "react";
+import { type mainTextObject } from "@/lib/notionHelper";
 
 import { poppins } from "@/app/fonts";
 
-export default function Testimonial({ notion }: { notion: any }) {
+export default function Testimonial({
+	heading,
+	items,
+}: {
+	heading: mainTextObject;
+	items: any;
+}) {
 	const [isDown, setIsDown] = useState(false);
 	const [overflowing, setOverflowing] = useState(false);
 	const [startX, setStartX] = useState(0);
@@ -44,7 +51,7 @@ export default function Testimonial({ notion }: { notion: any }) {
 		};
 	}, []);
 
-	const ucItems = notion.slice(1);
+	const ucItems = items;
 	let ucIndexes = [ucItems.length - 2, ucItems.length - 1];
 	for (let i = 0; i < ucItems.length; i++) ucIndexes.push(i);
 	ucIndexes.push(0, 1);
@@ -188,13 +195,13 @@ export default function Testimonial({ notion }: { notion: any }) {
 						className={`${poppins.className}`}
 						style={{ marginBottom: "8px" }}
 					>
-						{notion[0].h}
+						{heading.Text}
 					</h3>
 					<p
 						className={`${poppins.className}`}
 						style={{ marginBottom: "15px" }}
 					>
-						{notion[0].p}
+						{heading.altText}
 					</p>
 				</div>
 				<div className="TestimonialCarouselContainer">

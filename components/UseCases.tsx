@@ -21,13 +21,13 @@ export default function UseCases({ notion }: { notion: any }) {
 							className={`${poppins.className}`}
 							style={{ marginBottom: "8px" }}
 						>
-							{notion[0].h}
+							{notion[0].Text}
 						</h3>
 						<p
 							className={`${poppins.className}`}
 							style={{ marginBottom: "15px" }}
 						>
-							{notion[0].p}
+							{notion[0].altText}
 						</p>
 					</SlideOnIntersect>
 				</div>
@@ -39,7 +39,7 @@ export default function UseCases({ notion }: { notion: any }) {
 									<img
 										loading="lazy"
 										className="UseCasesImg"
-										src={item.img}
+										src={item.URL}
 										alt="usecases"
 									></img>
 								</div>
@@ -47,7 +47,7 @@ export default function UseCases({ notion }: { notion: any }) {
 									className={`${poppins.className}`}
 									style={{ margin: "0 0 18px", fontWeight: "600" }}
 								>
-									{item.h}
+									{item.Text}
 								</h4>
 								<p className={`${poppins.className}`}>{item.p}</p>
 							</SlideOnIntersect>

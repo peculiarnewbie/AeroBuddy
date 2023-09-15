@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Header from "@/components/header";
 import Banner from "@/components/Banner";
+import { defaultNotionHeaders, type mainTextObject } from "@/lib/notionHelper";
 import { Client } from "@notionhq/client";
 import { Content } from "next/font/google";
 import { equal } from "assert";
@@ -21,7 +22,7 @@ import { get } from "http";
 import ConsoleLogger from "@/components/ConsoleLogger";
 
 export default async function Home() {
-	async function getSectionData(section: string, database?: string) {
+	async function getContent(database?: boolean) {
 		const body = database
 			? JSON.stringify({
 					sorts: [
@@ -32,13 +33,11 @@ export default async function Home() {
 					],
 			  })
 			: JSON.stringify({
-					filter: {
-						property: "Section",
-						select: {
-							equals: section,
-						},
-					},
 					sorts: [
+						{
+							property: "Section",
+							direction: "ascending",
+						},
 						{
 							property: "index",
 							direction: "ascending",
@@ -48,12 +47,7 @@ export default async function Home() {
 
 		const options = {
 			method: "POST",
-			headers: {
-				accept: "application/json",
-				"Notion-Version": "2022-06-28",
-				"content-type": "application/json",
-				Authorization: `Bearer ${process.env.NOTION_KEY}`,
-			},
+			headers: defaultNotionHeaders,
 			next: { tags: ["content"] },
 			body: body,
 		};
@@ -73,166 +67,66 @@ export default async function Home() {
 		return response;
 	}
 
-	const bannerData = getSectionData("Banner");
+	const res = await getContent();
+	const allData = res.results;
+
+	const getSectionData = (section: string) => {
+		let sectionArray = allData.filter(
+			(item: any) => item.properties.Section.select?.name == section
+		);
+		let objectArray: mainTextObject[] = [];
+		for (let i = 0; i < sectionArray.length; i++) {
+			let object: mainTextObject = {
+				index: sectionArray[i].properties.index.number,
+				Text: sectionArray[i].properties.Text.rich_text[0]?.plain_text,
+				altText: sectionArray[i].properties.altText.rich_text[0]?.plain_text,
+				URL: sectionArray[i].properties.URL?.url,
+			};
+			objectArray.push(object);
+		}
+		return objectArray;
+	};
+
+	function getTestimonial(data: any) {
+		let objectArray = [];
+		for (let i = 0; i < data.length; i++) {
+			let object = {
+				personName: data[i]?.properties.PersonName.rich_text[0]?.plain_text,
+				position: data[i]?.properties.Position.rich_text[0]?.plain_text,
+				comment: data[i]?.properties.Comment.rich_text[0]?.plain_text,
+				img: data[i]?.properties.Picture?.url,
+			};
+			objectArray.push(object);
+		}
+		return objectArray;
+	}
+
+	const banner = getSectionData("Banner");
 	const clientsData = getSectionData("Clients");
-	const usecasesData = getSectionData("UseCases");
-	const technologyData = getSectionData("Technology");
-	const integrationData = getSectionData("Integration");
-	const supportData = getSectionData("Support");
-	const channelsData = getSectionData("Channels");
-	const testimonialHeadingData = getSectionData("Testimonials");
-	const testimonialData = getSectionData("Testimonial", "Testimonials");
-
-	const [
-		banner,
-		client,
-		usecases,
-		technology,
-		integration,
-		support,
-		channels,
-		testimonialHeading,
-		testimonials,
-	] = await Promise.all([
-		bannerData,
-		clientsData,
-		usecasesData,
-		technologyData,
-		integrationData,
-		supportData,
-		channelsData,
-		testimonialHeadingData,
-		testimonialData,
-	]);
-
-	const allData = [
-		banner,
-		client,
-		usecases,
-		technology,
-		integration,
-		support,
-		channels,
-		testimonialHeading,
-		testimonials,
-	];
-
-	const sIndex = {
-		banner: 0,
-		clients: 1,
-		usecases: 2,
-		technology: 3,
-		integration: 4,
-		support: 5,
-		channels: 6,
-		testimonialHeading: 7,
-		testimonials: 8,
-	};
-
-	function getText(groupIndex: number, index: number) {
-		//@ts-ignore
-		const text =
-			allData[groupIndex].results[index]?.properties.Text.rich_text[0]
-				?.plain_text;
-		return text ? text : "missing notion block";
-	}
-
-	function getAltText(groupIndex: number, index: number) {
-		//@ts-ignore
-		const text =
-			allData[groupIndex].results[index]?.properties.altText.rich_text[0]
-				?.plain_text;
-		return text ? text : "missing notion block";
-	}
-
-	function getImage(groupIndex: number, index: number) {
-		//@ts-ignore
-		const url = allData[groupIndex].results[index]?.properties.URL?.url;
-		return url ? url : "missing url";
-	}
-
-	function getObject(groupIndex: number, index: number) {
-		return {
-			h: getText(groupIndex, index),
-			p: getAltText(groupIndex, index),
-			img: getImage(groupIndex, index),
-		};
-	}
-
-	function getTestimonial(groupIndex: number, index: number) {
-		return {
-			personName:
-				allData[groupIndex].results[index]?.properties.PersonName.rich_text[0]
-					?.plain_text,
-			position:
-				allData[groupIndex].results[index]?.properties.Position.rich_text[0]
-					?.plain_text,
-			comment:
-				allData[groupIndex].results[index]?.properties.Comment.rich_text[0]
-					?.plain_text,
-			img: allData[groupIndex].results[index]?.properties.Picture?.url,
-		};
-	}
-
-	const content = {
-		banner: [getObject(sIndex.banner, 0)],
-		clients: [
-			getImage(sIndex.clients, 0),
-			getImage(sIndex.clients, 1),
-			getImage(sIndex.clients, 2),
-			getImage(sIndex.clients, 3),
-			getImage(sIndex.clients, 4),
-		],
-		usecases: [
-			getObject(sIndex.usecases, 0),
-			getObject(sIndex.usecases, 1),
-			getObject(sIndex.usecases, 2),
-			getObject(sIndex.usecases, 3),
-		],
-		technology: [
-			getObject(sIndex.technology, 0),
-			getObject(sIndex.technology, 1),
-			getObject(sIndex.technology, 2),
-			getObject(sIndex.technology, 3),
-			getObject(sIndex.technology, 4),
-		],
-		integration: [
-			getObject(sIndex.integration, 0),
-			getObject(sIndex.integration, 1),
-			getObject(sIndex.integration, 2),
-			getObject(sIndex.integration, 3),
-		],
-		support: [
-			getObject(sIndex.support, 0),
-			getObject(sIndex.support, 1),
-			getObject(sIndex.support, 2),
-			getObject(sIndex.support, 3),
-		],
-		channels: [
-			getObject(sIndex.channels, 0),
-			getObject(sIndex.channels, 1),
-			getObject(sIndex.channels, 2),
-			getObject(sIndex.channels, 3),
-		],
-		testimonials: [
-			getObject(sIndex.testimonialHeading, 0),
-			getTestimonial(sIndex.testimonials, 0),
-			getTestimonial(sIndex.testimonials, 1),
-			getTestimonial(sIndex.testimonials, 2),
-		],
-	};
+	const clients = clientsData.map((item) => item.URL);
+	const useCases = getSectionData("UseCases");
+	const technology = getSectionData("Technology");
+	const integration = getSectionData("Integration");
+	const support = getSectionData("Support");
+	const channels = getSectionData("Channels");
+	const testimonialHeading = getSectionData("Testimonials");
+	const testimonialsData = await getContent(true);
+	const testimonials = getTestimonial(testimonialsData.results);
 
 	return (
 		<main className={styles.main} style={{ justifyContent: "start" }}>
-			<Banner notion={content.banner}></Banner>
-			<Clients notion={content.clients}></Clients>
-			<UseCases notion={content.usecases}></UseCases>
-			<Technology notion={content.technology}></Technology>
-			<Integration notion={content.integration}></Integration>
-			<Channels notion={content.channels}></Channels>
-			<Testimonial notion={content.testimonials}></Testimonial>
+			<Banner notion={banner}></Banner>
+			<Clients notion={clients}></Clients>
+			<UseCases notion={useCases}></UseCases>
+			<Technology notion={technology}></Technology>
+			<Integration notion={integration}></Integration>
+			<Channels notion={channels}></Channels>
+			<Testimonial
+				heading={testimonialHeading[0]}
+				items={testimonials}
+			></Testimonial>
 			<HomeFooter></HomeFooter>
-			{/* <ConsoleLogger data={client}></ConsoleLogger> */}
+			{/* <ConsoleLogger data={testimonials}></ConsoleLogger> */}
 		</main>
 	);
 }

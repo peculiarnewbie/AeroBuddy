@@ -20,10 +20,12 @@ export default async function Banner({ notion }: { notion: any }) {
 			<div className="Container Banner-Container">
 				<div className="Content1">
 					<SlideOnIntersect direction="left" delay={0}>
-						<h2 className={`${poppins.className} Content1H2`}>{notion[0].h}</h2>
+						<h2 className={`${poppins.className} Content1H2`}>
+							{notion[0].Text}
+						</h2>
 					</SlideOnIntersect>
 					<SlideOnIntersect direction="left" delay={1}>
-						<p className={`Content1p`}>{notion[0].p}</p>
+						<p className={`Content1p`}>{notion[0].altText}</p>
 					</SlideOnIntersect>
 					<BannerEmail session={session}></BannerEmail>
 				</div>
@@ -40,7 +42,7 @@ export default async function Banner({ notion }: { notion: any }) {
 							<img
 								className="Bannerimg"
 								loading="lazy"
-								src={notion[0].img}
+								src={notion[0].URL}
 								alt="1st Content"
 							></img>
 						</SlideOnIntersect>

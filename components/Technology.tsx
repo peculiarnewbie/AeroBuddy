@@ -21,13 +21,13 @@ export default function Technology({ notion }: { notion: any }) {
 							className={`${poppins.className}`}
 							style={{ fontWeight: "300", fontSize: "34" }}
 						>
-							{notion[0].h}
+							{notion[0].Text}
 						</h3>
 						<h3
 							className={`${poppins.className}`}
 							style={{ marginBottom: "15px", fontSize: "34" }}
 						>
-							{notion[0].p}
+							{notion[0].altText}
 						</h3>
 					</SlideOnIntersect>
 				</div>
@@ -39,7 +39,7 @@ export default function Technology({ notion }: { notion: any }) {
 									<img
 										loading="lazy"
 										className="TechnologyImg"
-										src={item.img}
+										src={item.URL}
 										alt="usecases"
 									></img>
 								</div>
@@ -48,9 +48,9 @@ export default function Technology({ notion }: { notion: any }) {
 										className={`${poppins.className}`}
 										style={{ margin: "0 0 18px", fontWeight: "500" }}
 									>
-										{item.h}
+										{item.Text}
 									</h4>
-									<p className={`${poppins.className}`}>{item.p}</p>
+									<p className={`${poppins.className}`}>{item.altText}</p>
 								</div>
 							</SlideOnIntersect>
 						</div>
